@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function() {
+    Route::get('login', 'LoginController@getLogin');
+    Route::get('logout', 'LoginController@logout');
+    Route::post('login', 'LoginController@postLogin');
+});
+
+
+Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 'admin'], function() {
+    Route::get('/', 'IndexController@index');
+});
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
