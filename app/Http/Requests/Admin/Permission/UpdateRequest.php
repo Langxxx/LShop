@@ -24,7 +24,6 @@ class UpdateRequest extends Request
      */
     public function rules()
     {
-        $data = $this->request->all();
         return Route::currentRouteName() == 'admin.permission.edit' ? [] : [
             'name' => 'required|max:100',
             'display_name' => 'sometimes|max:100',

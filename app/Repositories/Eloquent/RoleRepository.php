@@ -70,4 +70,10 @@ class RoleRepository extends  Repository
             return ['status' => true];
         }
     }
+
+    public function getRolesForSelect($needFirstSelect = true, $firstSelectName = '--暂不选择--')
+    {
+        $roles = $this->all()->pluck('display_name', 'id');
+        return $roles;
+    }
 }
