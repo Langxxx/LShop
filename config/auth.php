@@ -112,4 +112,6 @@ return [
         ],
     ],
 
+    'model' => 'App\Models\Admin',
+
 ];

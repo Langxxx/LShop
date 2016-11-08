@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
     Route::get('/', 'IndexController@index');
 
     RBAC::resource('permission', 'PermissionController');
+    RBAC::resource('role', 'RoleController');
 });
 Route::auth();
 

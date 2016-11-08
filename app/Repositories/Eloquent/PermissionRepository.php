@@ -17,12 +17,14 @@ class PermissionRepository extends  Repository
         return Permission::class;
     }
 
-    public function getPermissionsForSelect()
+    public function getPermissionsForSelect($needFirstSelect = true, $firstSelectName = '--顶级权限--')
     {
         $temp = $this->all(['id', 'pid', 'display_name'])->toArray();
 
         $tree = $this->getTree($temp);
-        array_unshift($tree, ['display_name' => '--顶级权限--', 'id' => '0']);
+        if ($needFirstSelect) {
+            array_unshift($tree, ['display_name' => $firstSelectName, 'id' => '0']);
+        }
 
         $permissions = array();
         foreach ($tree as $item) {

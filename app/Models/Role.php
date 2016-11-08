@@ -7,4 +7,10 @@ use Zizaco\Entrust\EntrustRole;
 class Role extends EntrustRole
 {
     //
+    protected $fillable = ['name', 'display_name', 'description'];
+
+    public function getDescriptionAttribute($attr)
+    {
+        return $attr ? $attr : '无';
+    }
 }

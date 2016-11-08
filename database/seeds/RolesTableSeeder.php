@@ -17,7 +17,7 @@ class RolesTableSeeder extends Seeder
             'name' => 'permissionManager',
             'display_name' => '权限管理员'
         ]);
-        $permission = Permission::where('name', 'dmin.permission')->first();
+        $permission = Permission::where('name', 'admin.permission')->first();
         $permissionManager->attachPermission($permission);
     }
 }
