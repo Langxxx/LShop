@@ -20,7 +20,7 @@ class CreateRequest extends Request
      */
     public function rules()
     {
-        return Route::currentRouteName() == 'admin.role.create' ? [] : [
+        return $this->getMethod() == 'GET' ? [] : [
             'name' => 'required|max:100|',
             'display_name' => 'sometimes|max:100',
             'description' => 'sometimes|max:100',

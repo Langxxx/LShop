@@ -84,6 +84,8 @@
                         if (response['status']) {
                             tr.fadeOut("slow");
                             swal("删除成功!", "权限已经删除.", "success");
+                        }else {
+                            swal("删除失败!", response['msg'], "error");
                         }
                     }
                 })

@@ -12,13 +12,14 @@ use App\Http\Requests\Admin\Admin\CreateRequest;
 use App\Http\Requests\Admin\Admin\UpdateRequest;
 use Alert;
 
-class AdminController extends Controller
+class AdminController extends BaseController
 {
     protected $admin;
     protected $role;
 
     public function __construct(AdminRepository $admin, RoleRepository $role)
     {
+        parent::__construct();
         $this->admin = $admin;
         $this->role = $role;
     }

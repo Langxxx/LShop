@@ -12,13 +12,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 
-class RoleController extends Controller
+class RoleController extends BaseController
 {
     protected $role;
     protected $permission;
 
     public function __construct(RoleRepository $role, PermissionRepository $permission)
     {
+        parent::__construct();
         $this->role = $role;
         $this->permission = $permission;
     }

@@ -12,13 +12,14 @@ use App\Http\Requests\Admin\Permission\CreateRequest;
 use App\Http\Requests\Admin\Permission\UpdateRequest;
 use Alert;
 
-class PermissionController extends Controller
+class PermissionController extends BaseController
 {
 
     protected  $permission;
 
     public function __construct(PermissionRepository $permission)
     {
+        parent::__construct();
         $this->permission = $permission;
     }
 

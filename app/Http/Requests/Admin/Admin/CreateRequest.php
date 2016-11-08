@@ -20,7 +20,7 @@ class CreateRequest extends Request
      */
     public function rules()
     {
-        return Route::currentRouteName() == 'admin.admin.create' ? [] : [
+        return $this->getMethod() == 'GET' ? [] : [
             'email' => 'required|email|unique:admins',
             'password' => 'required|confirmed',
         ];

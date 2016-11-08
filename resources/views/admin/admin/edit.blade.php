@@ -65,5 +65,4 @@
         </div>
         <!-- /.panel -->
     </div>
-    @include('sweet::alert')
 @endsection

@@ -24,7 +24,7 @@ class UpdateRequest extends Request
      */
     public function rules()
     {
-        return Route::currentRouteName() == 'admin.permission.edit' ? [] : [
+        return $this->getMethod() == 'GET' ? [] : [
             'name' => 'required|max:100',
             'display_name' => 'sometimes|max:100',
             'description' => 'sometimes|max:100',

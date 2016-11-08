@@ -25,7 +25,7 @@ class UpdateRequest extends Request
      */
     public function rules()
     {
-        return Route::currentRouteName() == 'admin.admin.edit' ? [] : [
+        return $this->getMethod() == 'GET' ? [] : [
             'email' => 'required|email',
         ];
     }

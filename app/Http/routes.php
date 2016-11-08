@@ -11,9 +11,9 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 use App\Facades\RBAC;
 
 Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function() {

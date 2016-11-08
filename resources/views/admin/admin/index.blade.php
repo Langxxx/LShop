@@ -5,6 +5,11 @@
 @section('pageAction')
     <button type="button" class="btn btn-success" onclick="location.href='{{ url('admin/admin/create') }}'">添加管理员</button>
 @endsection
+@section('HeaderCSSAndJS')
+    <meta name="_token" content="{{ csrf_token() }}">
+    <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+@endsection
 @section('content')
 
     <div class="row">
