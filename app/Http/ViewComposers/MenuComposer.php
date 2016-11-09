@@ -8,7 +8,9 @@
 namespace App\Http\ViewComposers;
 
 use App\Repositories\Eloquent\PermissionRepository;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Cache;
 
 class MenuComposer
 {
@@ -27,6 +29,10 @@ class MenuComposer
 
     protected function getMenu()
     {
+//        if (Cache::has('admin.globals.cache.menuList')) {
+//            return Cache::get('admin.globals.cache.menuList');
+//        }
+
         $menuPermissions = $this->permission->getCurrentUserAllPermissions();
 
         $html = '';
@@ -46,6 +52,8 @@ class MenuComposer
             }
             $html .= '</li>';
         }
+//        $expiresAt = Carbon::now()->addMinutes(1);
+//        Cache::put('admin.globals.cache.menuList', $html, $expiresAt);
 
         return $html;
     }
