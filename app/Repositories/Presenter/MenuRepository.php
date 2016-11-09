@@ -10,7 +10,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\Role;
 use App\Repositories\Eloquent\Repository;
 
-class RoleRepository extends  Repository
+class MenuRepository extends  Repository
 {
     public function model()
     {
@@ -75,10 +75,5 @@ class RoleRepository extends  Repository
     {
         $roles = $this->all()->pluck('display_name', 'id');
         return $roles;
-    }
-
-    public function getAllPermissionsByRole($role)
-    {
-        dd($this);
     }
 }

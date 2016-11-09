@@ -34,16 +34,19 @@ class PermissionRepository extends  Repository
         return $permissions;
     }
 
-    protected function getTree($array, $pid = 0, $level = 0)
+    protected function getTree($array, $pid = 0, $level = 0, $repeatStr = '----', $isClear = true)
     {
         static $ret = array();
-
+        if ($isClear) {
+            $ret = [];
+        }
         foreach ($array as $key => $item) {
+
             if ($item['pid'] == $pid) {
                 $item['level'] = $level;
-                $item['display_name'] = str_repeat('----', $level) . $item['display_name'];
+                $item['display_name'] = str_repeat($repeatStr, $level) . $item['display_name'];
                 $ret[] = $item;
-                $this->getTree($array, $item['id'], $level+1);
+                $this->getTree($array, $item['id'], $level+1, $repeatStr, false);
             }
         }
         return $ret;
@@ -56,6 +59,31 @@ class PermissionRepository extends  Repository
             return ['status' => true];
         }else {
             return ['status' => false];
+        }
+    }
+
+    public function getCurrentUserAllPermissions()
+    {
+        $admin = auth()->guard('admin')->user();
+        if ($admin->is_super) {
+            //超级管理员取得所有权限
+            $menuPermission = $this->all(['id', 'pid', 'name', 'display_name', 'is_menu'])->filter(function ($item) {
+                return $item->is_menu == 1;
+            });
+
+            $tree = $this->getTree($menuPermission, 0, 0, '');
+            return $tree;
+        }else {
+            //获得当前管理员的角色
+            $roles = $admin->roles()->with('perms')->get();
+            $menuPermission = $roles->pluck('perms')->flatten()->filter(function ($item) {
+                return $item->is_menu == 1;
+            })->unique(function ($item) {
+                return $item->name;
+            });
+
+            $tree = $this->getTree($menuPermission, 0, 0, '');
+            return $tree;
         }
     }
 }

@@ -29,6 +29,7 @@ class EntrustSetupTables extends Migration
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
             $table->smallInteger('pid')->unsigned()->defaut(0)->comment('上级权限,0代表顶级');
+            $table->tinyInteger('is_menu')->default(0)->comment('是否作为菜单显示,[1|0]');
             $table->timestamps();
         });
 

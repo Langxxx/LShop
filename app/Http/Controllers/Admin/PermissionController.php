@@ -25,7 +25,7 @@ class PermissionController extends BaseController
 
     public function index()
     {
-        $permissions = $this->permission->paginate(5);
+        $permissions = $this->permission->paginate(15);
 
         return view('admin/permission/index', compact('permissions'));
     }

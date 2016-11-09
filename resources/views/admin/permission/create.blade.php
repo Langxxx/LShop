@@ -53,6 +53,11 @@
                             {!! Form::text('description', '', ['class' => 'form-control']) !!}
                             <p class="help-block">权限描述.</p>
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('is_menu', '是否菜单显示: ') !!}
+                            {!! Form::select('is_menu', ['0' => '否', '1' => '是'], 2, ['class' => 'form-control js-example-basic-single']) !!}
+                        </div>
+
                         <!-- Change this to a button or input when using this as a form -->
                         <a onclick="$('form').submit()" class="btn btn-success btn-block">添加权限</a>
 
