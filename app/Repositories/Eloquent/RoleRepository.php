@@ -71,7 +71,7 @@ class RoleRepository extends  Repository
         }
     }
 
-    public function getRolesForSelect($needFirstSelect = true, $firstSelectName = '--暂不选择--')
+    public function getRolesForSelect()
     {
         $roles = $this->all()->pluck('display_name', 'id');
         return $roles;

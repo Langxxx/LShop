@@ -27,10 +27,10 @@ return [
      |
      */
     'storage' => [
-        'enabled'    => true,
-        'driver'     => 'redis', // redis, file, pdo, custom
+        'enabled'    => false,
+        'driver'     => 'file', // redis, file, pdo, custom
         'path'       => storage_path('debugbar'), // For file driver
-        'connection' => 'session',   // Leave null for default connection (Redis/PDO)
+        'connection' => '',   // Leave null for default connection (Redis/PDO)
         'provider'   => '' // Instance of StorageInterface for custom driver
     ],
 

@@ -162,6 +162,7 @@ return [
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         App\Providers\RABCRouteProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        'Baum\Providers\BaumServiceProvider',
 
     ],
 
