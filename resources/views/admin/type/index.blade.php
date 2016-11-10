@@ -31,7 +31,8 @@
                             @foreach($types as $type)
                                 <tr>
                                     <td>{{ $type->name }}</td>
-                                    <td><a href="{{ url('admin/type/' . $type->id . '/edit') }}">编辑</a> |
+                                    <td><a href="{{ url('admin/attribute/' . $type->id) }}">属性列表</a> |
+                                        <a href="{{ url('admin/type/' . $type->id . '/edit') }}">编辑</a> |
                                         <a href="#">移除</a></td>
                                 </tr>
                             @endforeach

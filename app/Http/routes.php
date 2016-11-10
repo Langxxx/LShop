@@ -32,6 +32,17 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
     RBAC::resource('goods', 'GoodsController');
     RBAC::resource('category', 'CategoryController');
     RBAC::resource('type', 'TypeController');
+
+    Route::get('attribute/{typeID}', ['as' => 'admin.attribute.index', 'uses' =>
+        'AttributeController@index']);
+    Route::get('attribute/{typeID}/create', ['as' => 'admin.attribute.create', 'uses' =>
+        'AttributeController@create']);
+    Route::post('attribute/{typeID}', ['as' => 'admin.attribute.create', 'uses' =>
+        'AttributeController@create']);
+    Route::get('attribute/{attrID}/edit', ['as' => 'admin.attribute.edit', 'uses' =>
+        'AttributeController@edit']);
+    Route::put('attribute/{attrID}', ['as' => 'admin.attribute.edit', 'uses' =>
+        'AttributeController@edit']);
 });
 Route::auth();
 

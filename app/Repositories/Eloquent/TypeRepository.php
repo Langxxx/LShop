@@ -16,4 +16,9 @@ class TypeRepository extends  Repository
     {
         return Type::class;
     }
+
+    public function getTypesForSelect()
+    {
+       return $this->all()->pluck('name', 'id');
+    }
 }
