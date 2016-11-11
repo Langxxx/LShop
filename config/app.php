@@ -163,6 +163,7 @@ return [
         App\Providers\RABCRouteProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         'Baum\Providers\BaumServiceProvider',
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -215,6 +216,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

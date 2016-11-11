@@ -1,0 +1,46 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: wl
+ * Date: 16/11/11
+ * Time: 10:42
+ */
+
+use Illuminate\Support\Facades\Input;
+use Intervention\Image\Facades\Image;
+
+function uploadOne($postKey, $dirName, $quality = 90, $thumb = array()) {
+
+    $file = Input::file($postKey);
+//    dd($file);
+    if(!$file->isValid()){
+        return ['status' => false, 'error' => '上传图片出错'];
+    }
+    $image = Image::make($file);
+
+    $clientName = $file->getClientOriginalName();
+    $newName = md5(date('ymdhis').$clientName) . '.' . $file ->
+    getClientOriginalExtension();
+    $path = 'uploads/'. $dirName .date('Y-m-d') . '/'; //DIRECTORY_SEPARATOR
+
+    if (!File::exists($path)) {
+        File::makeDirectory($path, 0755, true);
+    }
+
+    $oImage = $image->save($path . $newName, $quality);
+    $ret['images'][0] = $oImage->dirname . '/' . $oImage->basename;
+    //制作缩略图
+    if (isset($thumb)) {
+        foreach ($thumb as $k => $item) {
+            $tImage = $image->resize($item[0], $item[1])->save($path . 'thumb' . $k . $newName);
+            $ret['images'][$k + 1] = $tImage->dirname . '/' . $tImage->basename;
+        }
+    }
+
+    return $ret;
+}
+
+function showImg($url, $width='', $height='') {
+    $url = \Illuminate\Support\Facades\Config::get('app.url') . '/' . $url;
+    echo "<img src='$url' $width $height>";
+}
