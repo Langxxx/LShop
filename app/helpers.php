@@ -32,7 +32,7 @@ function uploadOne($postKey, $dirName, $quality = 90, $thumb = array()) {
     //制作缩略图
     if (isset($thumb)) {
         foreach ($thumb as $k => $item) {
-            $tImage = $image->resize($item[0], $item[1])->save($path . 'thumb' . $k . $newName);
+            $tImage = $image->resize($item[0], $item[1])->save($path . 'thumb_' . $k . $newName);
             $ret['images'][$k + 1] = $tImage->dirname . '/' . $tImage->basename;
         }
     }
@@ -42,5 +42,11 @@ function uploadOne($postKey, $dirName, $quality = 90, $thumb = array()) {
 
 function showImg($url, $width='', $height='') {
     $url = \Illuminate\Support\Facades\Config::get('app.url') . '/' . $url;
+    if ($width){
+        $width = "width='$width'";
+    }
+    if ($height) {
+        $height = "height='$height'";
+    }
     echo "<img src='$url' $width $height>";
 }

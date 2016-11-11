@@ -40,4 +40,10 @@ class BrandRepository extends  Repository
         }
         return $brand->update($attributes);
     }
+
+    public function getBrandsForSelect()
+    {
+        $brands =  $this->all()->pluck('name', 'id');
+        return $brands;
+    }
 }
