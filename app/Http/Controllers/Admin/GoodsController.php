@@ -44,4 +44,13 @@ class GoodsController extends BaseController
         $brands = $this->brand->getBrandsForSelect();
         return view('admin/goods/create', compact('categories', 'brands'));
     }
+
+    public function edit(UpdateRequest $request, $goodsID)
+    {
+
+        $goods = $this->goods->find($goodsID);
+        $categories = $this->category->getCategoriesForSelect();
+        $brands = $this->brand->getBrandsForSelect();
+        return view('admin/goods/edit', compact('categories', 'brands', 'goods'));
+    }
 }

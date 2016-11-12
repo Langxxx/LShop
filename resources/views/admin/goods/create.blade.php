@@ -5,6 +5,11 @@
 @section('pageAction')
     <button type="button" class="btn btn-primary" onclick="location.href='{{ url('admin/goods/') }}'">商品列表</button>
 @endsection
+@section('HeaderCSSAndJS')
+    <script type="text/javascript" charset="utf-8" src="/js/admin/UEditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/admin/UEditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/lang/zh-cn/zh-cn.js"></script>
+@endsection
 @section('FooterCSSAndJS')
     <link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
     <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
@@ -14,6 +19,11 @@
 
     <script type="text/javascript">
         $(".js-example-basic-single").select2();
+    </script>
+    <script>
+        UE.getEditor('goods_desc', {
+            "maximumWords" : 10000            // 最大可以输入的字符数量
+        });
     </script>
 @endsection
 @section('content')
@@ -98,8 +108,12 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile">
-                                <h4>Profile Tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <textarea id="goods_desc" name="goods_desc"></textarea>
+
+
+                                <div class="form-group">
+{{--                                    {!! Form::text('goods_desc', '', ['class' => 'form-control', 'id' => 'goods_desc']) !!}--}}
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="messages">
                                 <h4>Messages Tab</h4>

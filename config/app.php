@@ -164,6 +164,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         'Baum\Providers\BaumServiceProvider',
         Intervention\Image\ImageServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
 
     ],
 
@@ -217,6 +218,7 @@ return [
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ],
 
 ];

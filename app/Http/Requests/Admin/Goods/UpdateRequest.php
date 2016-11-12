@@ -26,14 +26,23 @@ class UpdateRequest extends Request
     public function rules()
     {
         return $this->getMethod() == 'GET' ? [] : [
-            'email' => 'required|email',
+            'name' => 'required|max:50',
+            'logo' => 'sometimes|image',
+            'market_price' => 'numeric',
+            'shop_price' => 'numeric',
+            'sort_num' => 'numeric',
         ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => '邮箱不能为空',
+            'name.required' => '商品名不能为空',
+            'name.max' => '商品名最大50个字符',
+            'logo.image' => '上传文件必须为图片格式',
+            'market_price.numeric' => '市面价必须是数值',
+            'shop_price.numeric' => '市面价必须是数值',
+            'sort_num.numeric' => '排序必须是数值',
         ];
     }
 }

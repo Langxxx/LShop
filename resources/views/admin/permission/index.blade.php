@@ -29,10 +29,10 @@
                             <tbody>
                             @foreach($permissions as $permission)
                                 <tr>
-                                    <td>{{ $permission->display_name }}</td>
-                                    <td>{{ $permission->description }}</td>
+                                    <td>{!! $permission->display_name !!}</td>
+                                    <td>{!! $permission->description !!}</td>
                                     <td><a href="{{ url('admin/permission/' . $permission->id . '/edit') }}">编辑</a> |
-                                        <a pid="{{ $permission->id }}" onclick="permissionDelete(this)" style="cursor:pointer;" >移除</a></td>
+                                        <a pid="{!! $permission->id !!}" onclick="permissionDelete(this)" style="cursor:pointer;" >移除</a></td>
                                 </tr>
                             @endforeach
                             </tbody>

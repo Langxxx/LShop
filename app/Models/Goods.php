@@ -16,24 +16,24 @@ class Goods extends Model
         $this->attributes['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $date);
     }
 
-    public function getIsHotAttribute($data)
-    {
-        return $data == 1 ? '是' : '否';
-    }
-
-    public function getIsNewAttribute($data)
-    {
-        return $data == 1 ? '是' : '否';
-    }
-
-    public function getIsBestAttribute($data)
-    {
-        return $data == 1 ? '是' : '否';
-    }
-    public function getIsOnSaleAttribute($data)
-    {
-        return $data == 1 ? '上架' : '下架';
-    }
+//    public function getIsHotAttribute($data)
+//    {
+//        return $data == 1 ? '是' : '否';
+//    }
+//
+//    public function getIsNewAttribute($data)
+//    {
+//        return $data == 1 ? '是' : '否';
+//    }
+//
+//    public function getIsBestAttribute($data)
+//    {
+//        return $data == 1 ? '是' : '否';
+//    }
+//    public function getIsOnSaleAttribute($data)
+//    {
+//        return $data == 1 ? '上架' : '下架';
+//    }
     public function category()
     {
         return $this->belongsTo('App\Models\category', 'category_id')->select('id', 'name');
