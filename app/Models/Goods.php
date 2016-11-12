@@ -34,6 +34,7 @@ class Goods extends Model
 //    {
 //        return $data == 1 ? '上架' : '下架';
 //    }
+
     public function category()
     {
         return $this->belongsTo('App\Models\category', 'category_id')->select('id', 'name');
@@ -42,5 +43,19 @@ class Goods extends Model
     public function brand()
     {
         return $this->belongsTo('App\Models\brand')->select('id', 'name');
+    }
+    public function type()
+    {
+        return $this->belongsTo('App\Models\type')->select('id', 'name');
+    }
+
+    public function attributes()
+    {
+        return $this->belongsToMany('App\Models\attribute', 'goods_attribute');
+    }
+
+    public function pics()
+    {
+        return $this->hasMany('App\Models\GoodsPics');
     }
 }

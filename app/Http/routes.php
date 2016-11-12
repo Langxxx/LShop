@@ -44,6 +44,10 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
         'AttributeController@edit']);
     Route::put('attribute/{attrID}', ['as' => 'admin.attribute.edit', 'uses' =>
         'AttributeController@edit']);
+
+    Route::get('goods/ajaxGetAttr/{typeID}', ['as' => 'admin.goods.ajaxGetAttr', 'uses' =>
+        'GoodsController@ajaxGetAttr']);
+
 });
 Route::auth();
 

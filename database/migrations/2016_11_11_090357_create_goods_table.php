@@ -32,8 +32,8 @@ class CreateGoodsTable extends Migration
 
             $table->unsignedTinyInteger('sort_num')->default(0)->index();
 
-//            $table->unsignedInteger('type_id')->foreign('type_id')->references('id')->on('types')->onUpdate('cascade')
-//                ->onDelete('cascade')->index();
+            $table->unsignedInteger('type_id')->foreign('type_id')->references('id')->on('types')->onUpdate('cascade')
+                ->onDelete('cascade')->index();
             $table->unsignedInteger('category_id')->foreign('category_id')->references('id')->on
             ('categories')->onUpdate('cascade')->onDelete('cascade')->index();
             $table->unsignedInteger('brand_id')->foreign('brand_id')->references('id')->on

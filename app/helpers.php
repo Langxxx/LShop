@@ -9,10 +9,11 @@
 use Illuminate\Support\Facades\Input;
 use Intervention\Image\Facades\Image;
 
-function uploadOne($postKey, $dirName, $quality = 90, $thumb = array()) {
+function uploadOne($file, $dirName, $quality = 90, $thumb = array()) {
 
-    $file = Input::file($postKey);
-//    dd($file);
+    if ($file == null) {
+        return ['status' => false, 'error' => '不存在图片'];
+    }
     if(!$file->isValid()){
         return ['status' => false, 'error' => '上传图片出错'];
     }
@@ -36,7 +37,7 @@ function uploadOne($postKey, $dirName, $quality = 90, $thumb = array()) {
             $ret['images'][$k + 1] = $tImage->dirname . '/' . $tImage->basename;
         }
     }
-
+    $ret['status'] = true;
     return $ret;
 }
 
