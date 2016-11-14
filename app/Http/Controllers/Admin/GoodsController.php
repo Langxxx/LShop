@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Goods\CreateRequest;
 use App\Http\Requests\Admin\Goods\UpdateRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class GoodsController extends BaseController
 {
@@ -54,12 +55,17 @@ class GoodsController extends BaseController
 
     public function edit(UpdateRequest $request, $goodsID)
     {
-
         $goods = $this->goods->find($goodsID);
+        if ($request->getMethod() == 'PUT') {
+            $this->goods->update($goodsID, $request->except('_token'));
+            return redirect('admin/goods');
+        }
         $categories = $this->category->getCategoriesForSelect();
         $brands = $this->brand->getBrandsForSelect();
-        return view('admin/goods/edit', compact('categories', 'brands', 'goods'));
+        $types = $this->type->getTypesForSelect();
+        return view('admin/goods/edit', compact('categories', 'brands', 'goods', 'types'));
     }
+
 
     public function ajaxGetAttr($typeID)
     {
@@ -69,5 +75,22 @@ class GoodsController extends BaseController
         }else {
             return response()->json(['status' => 'ok', 'content' => $attributes->toArray()]);
         }
+    }
+
+    public function ajaxDeleteAttr($attrID)
+    {
+        //todo 这样删除会对库存造成影响吗?还有商品类型切换的时候删除的属性会影响吗?
+        $attrID = $attrID + 0;
+        $ret = DB::table('goods_attribute')->where('id', '=', $attrID)->delete();
+        if ($ret) {
+            return response()->json(['status' => true]);
+        }else {
+            return response()->json(['status' => false, 'error' => '删除失败']);
+        }
+    }
+
+    public function ajaxDeleteImg($picID)
+    {
+        return $this->goods->deletePic($picID);
     }
 }

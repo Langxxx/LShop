@@ -43,7 +43,8 @@ class BrandRepository extends  Repository
 
     public function getBrandsForSelect()
     {
-        $brands =  $this->all()->pluck('name', 'id');
+//        $brands =  $this->all()->pluck('name', 'id');
+        $brands = $this->getAllForSelect('name', 'id');
         return $brands;
     }
 }

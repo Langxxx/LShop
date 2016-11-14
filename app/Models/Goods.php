@@ -9,7 +9,11 @@ class Goods extends Model
 {
     protected $dates = ['created_at'];
     public $timestamps = false;
-    protected $guarded = ['id'];
+//    protected $guarded = ['id'];
+    protected $fillable = ['pic', 'name', 'market_price', 'shop_price', 'logo', 'sm_logo',
+        'goods_desc', 'is_hot', 'is_new', 'is_best', 'is_delete', 'sort_num', 'type_id',
+        'category_id', 'brand_id', 'create_at'
+    ];
 
     public function setCreateAtAttribute($date)
     {
@@ -51,7 +55,7 @@ class Goods extends Model
 
     public function attributes()
     {
-        return $this->belongsToMany('App\Models\attribute', 'goods_attribute');
+        return $this->belongsToMany('App\Models\attribute', 'goods_attribute')->withPivot('id', 'attr_value', 'attr_price');;
     }
 
     public function pics()

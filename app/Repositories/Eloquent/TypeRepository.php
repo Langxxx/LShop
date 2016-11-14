@@ -19,7 +19,7 @@ class TypeRepository extends  Repository
 
     public function getTypesForSelect()
     {
-
-       return $this->all()->pluck('name', 'id');
+        return $this->getAllForSelect('name', 'id');
+//        return $this->all()->pluck('name', 'id');
     }
 }

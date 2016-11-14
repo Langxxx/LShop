@@ -39,7 +39,8 @@ class CategoryRepository extends  Repository
 
     public function getCategoriesForSelect()
     {
-        $cats =  $this->all()->pluck('name', 'id');
+//        $cats =  $this->all()->pluck('name', 'id');
+        $cats = $this->getAllForSelect('name', 'id');
         return $cats;
     }
 

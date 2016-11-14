@@ -27,6 +27,7 @@ class UpdateRequest extends Request
     {
         return $this->getMethod() == 'GET' ? [] : [
             'name' => 'required|max:50',
+            'category_id' => 'required',
             'logo' => 'sometimes|image',
             'market_price' => 'numeric',
             'shop_price' => 'numeric',
@@ -38,6 +39,7 @@ class UpdateRequest extends Request
     {
         return [
             'name.required' => '商品名不能为空',
+            'category_id.required' => '请选择一个分类',
             'name.max' => '商品名最大50个字符',
             'logo.image' => '上传文件必须为图片格式',
             'market_price.numeric' => '市面价必须是数值',

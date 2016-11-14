@@ -25,66 +25,17 @@
             "maximumWords" : 10000            // 最大可以输入的字符数量
         });
     </script>
+    <script src="/js/admin/goods.js"></script>
     <script>
-        //选择类型执行AJAX取出类型的属性
         $("select[name=type_id]").change(function() {
-            $typeID = $(this).val();
-            $.ajax({
-                type: "GET",
-                url: "{{ url('admin/goods/ajaxGetAttr') }}" + '/' +  $typeID,
-                dateType: 'json',
-                success: function (response) {
-                    if (response['status']) {
-                        var attributes = response['content'];
-                        var html = '';
-                        $(attributes).each(function (k, v) {
-                            {{--html += '{!! Form::label('type_id', '商品类型: ') !!}';--}}
-//                            html += "<label>" + v['name']  + ":</label>";
-                            if (v.type == 1) { //判断是否是可选
-                                html += '<div class="form-group ">';
-                                html += "<label class='col-sm-2 control-label'>" + "<a onclick='addNew(this)'" +
-                                        " href='javascript:void(0);'>[+]</a>" + v['name']  + ":</label>";
-//                                html += ' </div>'
-                            }else {
-                                html += "<div class='form-group'>";
-                                html += "<label class='col-sm-2 control-label'>" + v['name']  + ":</label>";
-                            }
-
-                            if (v.option_value == "") {
-                                html += '<div class="col-sm-5">';
-                                html += "<input name='attr_value[" + v.id + "][]' " +
-                                        "class='form-control' " +
-                                        "name=''>";
-                                html += '</div>';
-                            }else {
-                                html += '<div class="col-sm-5">';
-                                //把可选值转化成下拉框
-                                var attr = v.option_value.split(',');
-                                html += "<select name='attr_value[" + v.id + "][]' class='form-control " +
-                                        "js-example-basic-single'>";
-                                html += "<option value=''>请选择</option>";
-                                for (var i = 0; i < attr.length; i++) {
-                                    html += "<option value='" +  attr[i] + "'>" + attr[i] + "</option>";
-                                }
-                                html += "</select>"
-                                html += '</div>';
-                            }
-                            if (v.type == 1) {
-                                html += '<div class="col-sm-5">';
-                                html += "<input name='attr_price[" + v.id + "][]' class='form-control' " +
-                                        "placeholder='价格/单位/人民币'>";
-                                html += '</div>';
-                            }
-
-                            html += '</div>'
-                        });
-
-                        $('#type_attr').nextAll().remove();
-                        $('#type_attr').after(html);
-                    }
-                }
-            })
-        })
+            var typeID = $(this).val();
+            console.log(typeID)
+            if (typeID == 0) {
+                $('#type_attr').nextAll().remove();
+                return;
+            }
+            getTypeAttrView("{{ url('admin/goods/ajaxGetAttr') }}" + '/' +  typeID);
+        });
         function addNew(a) {
             var g = $(a).parent().parent();
 
@@ -98,7 +49,7 @@
 
         }
 
-        $('#type_id').trigger('change');
+//        $('#type_id').trigger('change');
     </script>
 @endsection
 @section('content')

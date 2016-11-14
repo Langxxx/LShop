@@ -41,6 +41,13 @@ function uploadOne($file, $dirName, $quality = 90, $thumb = array()) {
     return $ret;
 }
 
+function deleteImages($images) {
+//    $basePath = '/';
+    foreach ($images as $image) {
+        @unlink($image);
+    }
+}
+
 function showImg($url, $width='', $height='') {
     $url = \Illuminate\Support\Facades\Config::get('app.url') . '/' . $url;
     if ($width){

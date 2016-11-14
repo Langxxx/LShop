@@ -47,6 +47,10 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
 
     Route::get('goods/ajaxGetAttr/{typeID}', ['as' => 'admin.goods.ajaxGetAttr', 'uses' =>
         'GoodsController@ajaxGetAttr']);
+    Route::delete('goods/ajaxDeleteAttr/{attrID}', ['as' => 'admin.goods.ajaxDeleteAttr', 'uses' =>
+        'GoodsController@ajaxDeleteAttr']);
+    Route::delete('goods/ajaxDeleteImg/{picID}', ['as' => 'admin.goods.ajaxDeleteImg', 'uses' =>
+        'GoodsController@ajaxDeleteImg']);
 
 });
 Route::auth();

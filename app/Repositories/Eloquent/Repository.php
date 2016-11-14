@@ -160,4 +160,10 @@ abstract class Repository implements RepositoryInterface
         return $this->model->paginate($perPage, $columns);
     }
 
+    public function getAllForSelect( $key, $v, $firstInfo = "--请选择--")
+    {
+        $data[''] = $firstInfo;
+        $data +=  $this->all()->pluck($key, $v)->all();
+        return $data;
+    }
 }
