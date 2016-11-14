@@ -222,7 +222,7 @@
                                 </div>
 
                                 @inject('goodsService', 'App\Services\GoodsAttributeViewService')
-                                {!! $goodsService->getGoodsAttributeView($goods->attributes) !!}
+                                {!! $goodsService->getGoodsAttributeView($goods->attributes, $goods->type->id) !!}
                             </div>
                             <div class="tab-pane fade" id="settings">
                                 <br>
