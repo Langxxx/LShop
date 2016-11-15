@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
         'AttributeController@edit']);
     Route::put('attribute/{attrID}', ['as' => 'admin.attribute.edit', 'uses' =>
         'AttributeController@edit']);
+    Route::get('attribute/{typeID}/create', ['as' => 'admin.attribute.create', 'uses' =>
+        'AttributeController@create']);
 
     Route::get('goods/ajaxGetAttr/{typeID}', ['as' => 'admin.goods.ajaxGetAttr', 'uses' =>
         'GoodsController@ajaxGetAttr']);
@@ -52,6 +54,11 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
     Route::delete('goods/ajaxDeleteImg/{picID}', ['as' => 'admin.goods.ajaxDeleteImg', 'uses' =>
         'GoodsController@ajaxDeleteImg']);
 
+
+    Route::get('stock/{goodsID}', ['as' => 'admin.stock.index', 'uses' =>
+        'StockController@index']);
+    Route::post('stock/{goodsID}', ['as' => 'admin.stock.create', 'uses' =>
+        'StockController@create']);
 });
 Route::auth();
 

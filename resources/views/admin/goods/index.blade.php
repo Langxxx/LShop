@@ -29,6 +29,7 @@
                                 <th>新品</th>
                                 <th>精品</th>
                                 <th>上架</th>
+                                <th>库存量</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -43,7 +44,9 @@
                                     <td>{{ $goods->is_new }}</td>
                                     <td>{{ $goods->is_best }}</td>
                                     <td>{{ $goods->is_on_sale }}</td>
+                                    <td>{{ $goods->stocks->reduce(function ($carry, $item) { return $carry + $item->number; }, 0) }}</td>
                                     <td><a href="{{ url('admin/goods/' . $goods->id . '/edit') }}">编辑</a> |
+                                        <a href="{{ url('admin/stock/' . $goods->id) }}">库存</a> |
                                         <a pid="{{ $goods->id }}" onclick="goodsDelete(this)" style="cursor:pointer;" >移除</a></td>
                                 </tr>
                             @endforeach
@@ -67,44 +70,5 @@
     <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 @endsection
 @section('FooterCSSAndJS')
-    <script type="text/javascript">
-        function goodsDelete(e)
-        {
-            var pid = $(e).attr('pid');
-            var tr = $(e).parent().parent();
-            //todo 这里可以抽取一下
-            swal({
-                title: "确定要删除吗?",
-                text: "您正在删除一个商品!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                cancelButtonText: "取消!",
-                confirmButtonText: "删除!",
-                closeOnConfirm: false
-            },
-            function(){
-                $.ajax({
-                    type: 'DELETE',
-                    url: "{{ url('admin/goods') }}" + '/' +  pid,
-                    dataType: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        if (response['status']) {
-                            tr.fadeOut("slow");
-                            swal("删除成功!", "商品已经删除.", "success");
-                        }else {
-                            swal("删除失败!", response['msg'], "error");
-                        }
-                    }
-                })
-
-            });
-        }
-
-    </script>
 
 @endsection

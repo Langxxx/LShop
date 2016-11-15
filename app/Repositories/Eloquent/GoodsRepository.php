@@ -54,7 +54,7 @@ class GoodsRepository extends  Repository
 
                 $price = isset($attrPrice[$attrID][$k]) ? $attrPrice[$attrID][$k] : 0;
 
-                $goods->attributes()->attach($attrID, [
+                $goods->goodsAttributes()->attach($attrID, [
                     'attr_value' => $attr,
                     'attr_price' => $price,
                 ]);
@@ -130,7 +130,7 @@ class GoodsRepository extends  Repository
         //处理之前的属性
         if ($attributes['type_id'] != $attributes['old_type_id']) {
             //换了类型,删除所有属性
-            $goods->attributes()->detach();
+            $goods->goodsAttributes()->detach();
         }else {
 
             foreach ($oldAttrValues as $attrID => $attrs) {
@@ -141,7 +141,7 @@ class GoodsRepository extends  Repository
 
                     $price = isset($oldAttrPrice[$attrID][$k]) ? $oldAttrPrice[$attrID][$k] : 0;
 
-                    $goods->attributes()
+                    $goods->goodsAttributes()
                         ->where('goods_attribute.id', '=', $k)
                         ->update([
                             'attr_value' => $attr,
@@ -160,7 +160,7 @@ class GoodsRepository extends  Repository
 
                 $price = isset($attrPrice[$attrID][$k]) ? $attrPrice[$attrID][$k] : 0;
 
-                $goods->attributes()->attach($attrID, [
+                $goods->goodsAttributes()->attach($attrID, [
                     'attr_value' => $attr,
                     'attr_price' => $price,
                 ]);
@@ -190,7 +190,7 @@ class GoodsRepository extends  Repository
 
     public function allForList()
     {
-        $allGoods = $this->with('category')->with('brand');
+        $allGoods = $this->with('category')->with('brand')->with('stocks');
         return $allGoods;
     }
 
@@ -207,6 +207,50 @@ class GoodsRepository extends  Repository
             return response()->json(['status' => true]);
         }else {
             return response()->json(['status' => false, 'error' => '删除失败']);
+        }
+    }
+
+    public function getGoodsAttributesForSelect($goods)
+    {
+
+
+        $goodsTypeOptionAttributes = $goods->goodsAttributes()
+            ->where('type', '=', '1')
+            ->get()->groupBy('name');
+
+
+        foreach ($goodsTypeOptionAttributes as $goodsTypeOptionAttribute) {
+            $goodsTypeOptionAttribute->goodsAttribute = $goodsTypeOptionAttribute
+                ->flatMap(function($item, $key) {
+                    return [$item->pivot->attr_value => $item->pivot->id];
+                })->flip();
+        }
+        return $goodsTypeOptionAttributes;
+    }
+
+    public function setGoodsStocks($goodID, $stocksInfo)
+    {
+        $goods = $this->find($goodID);
+        $attrIDs = isset($stocksInfo['goods_attr_id']) ? $stocksInfo['goods_attr_id'] : [];
+        $stocks = $stocksInfo['number'];
+//        dd($stocksInfo);
+
+        //清除之前所有库存数据
+        $goods->stocks->each(function ($item, $key) {
+            $item->delete();
+        });
+
+        $rate = count($attrIDs) / count($stocks);
+        foreach ($stocks as $key => $stock) {
+            $offset = $key * $rate;
+            $ids = [];
+            for ($i = $offset; $i < $offset + $rate; $i++) {
+                $ids[] = $attrIDs[$i];
+            }
+            $goods->stocks()->create([
+                'goods_attr_id' => implode(',', $ids),
+                'number' => $stock + 0
+            ]);
         }
     }
 

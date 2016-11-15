@@ -53,7 +53,7 @@ class Goods extends Model
         return $this->belongsTo('App\Models\type')->select('id', 'name');
     }
 
-    public function attributes()
+    public function goodsAttributes()
     {
         return $this->belongsToMany('App\Models\attribute', 'goods_attribute')->withPivot('id', 'attr_value', 'attr_price');;
     }
@@ -61,5 +61,10 @@ class Goods extends Model
     public function pics()
     {
         return $this->hasMany('App\Models\GoodsPics');
+    }
+
+    public function stocks()
+    {
+        return $this->hasMany('App\Models\GoodsStock');
     }
 }

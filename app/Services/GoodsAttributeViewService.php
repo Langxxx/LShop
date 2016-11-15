@@ -30,9 +30,9 @@ class GoodsAttributeViewService
                 $goodsAttributes[] = $item;
             }
         }
-
         $html = '';
         $attrIDs = [];
+        $goodsAttributes = $goodsAttributes->sortBy('id');
         foreach ($goodsAttributes as $attribute) {
             if ($attribute->type == 1) {
 
