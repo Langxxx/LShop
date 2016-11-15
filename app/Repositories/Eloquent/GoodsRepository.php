@@ -267,4 +267,28 @@ class GoodsRepository extends  Repository
             });
     }
 
+    public function getHotGoods($limit = 6)
+    {
+        return $this->getSpecialGoods('is_hot', '=', '1', $limit);
+    }
+
+    public function getNewGoods($limit = 6)
+    {
+        return $this->getSpecialGoods('is_new', '=', '1', $limit);
+    }
+
+    public function getBestGoods($limit = 6)
+    {
+        return $this->getSpecialGoods('is_best', '=', '1', $limit);
+    }
+
+    protected function getSpecialGoods($column, $operator = null, $value = null, $limit)
+    {
+        return $this->model->where('is_on_sale', '=', '1')
+            ->where($column, $operator, $value)
+            ->select('id', 'name', 'shop_price')
+            ->orderBy('created_at', 'desc')
+            ->take($limit)
+            ->get();
+    }
 }

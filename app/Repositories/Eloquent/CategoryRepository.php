@@ -67,4 +67,8 @@ class CategoryRepository extends  Repository
         return $cat->update($attributes);
     }
 
+    public function tree()
+    {
+        return $this->model->root()->getDescendants(3, array('id', 'parent_id', 'name'))->toHierarchy();
+    }
 }
