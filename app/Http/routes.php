@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 use App\Facades\RBAC;
 
+
+/*******后台路由***********/
 Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function() {
     Route::get('login', 'LoginController@getLogin');
     Route::get('logout', 'LoginController@logout');
@@ -60,6 +59,14 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
     Route::post('stock/{goodsID}', ['as' => 'admin.stock.create', 'uses' =>
         'StockController@create']);
 });
+
+
+/*******前台路由***********/
+
+Route::group(['namespace' => 'home'], function () {
+    Route::get('/', 'HomeController@index');
+});
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
