@@ -77,10 +77,12 @@ class GoodsController extends BaseController
         }
     }
 
-    public function ajaxDeleteAttr($attrID)
+    public function ajaxDeleteAttr($attrID, $goodsID)
     {
         //todo 这样删除会对库存造成影响吗?还有商品类型切换的时候删除的属性会影响吗?
+        // 这里需要更新库存
         $attrID = $attrID + 0;
+        $this->goods->clearStocks($goodsID, $attrID); //删除库存
         $ret = DB::table('goods_attribute')->where('id', '=', $attrID)->delete();
         if ($ret) {
             return response()->json(['status' => true]);

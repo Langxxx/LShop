@@ -31,7 +31,7 @@ class GoodsRepository extends  Repository
             }
         }
 
-        $attrValues = $attrValues = $attributes['attr_value'];
+        $attrValues = isset($attributes['attr_value']) ? $attributes['attr_value'] : [];
 
         $attrPrice = [];
         if (isset($attributes['attr_price'])) {
@@ -247,11 +247,24 @@ class GoodsRepository extends  Repository
             for ($i = $offset; $i < $offset + $rate; $i++) {
                 $ids[] = $attrIDs[$i];
             }
+            sort($ids);
             $goods->stocks()->create([
                 'goods_attr_id' => implode(',', $ids),
                 'number' => $stock + 0
             ]);
         }
+    }
+
+    public function clearStocks($goodsID, $attrID)
+    {
+        $goods = $this->find($goodsID);
+        $attr = $goods->stocks()
+            ->whereRaw("FIND_IN_SET($attrID, goods_attr_id)")
+            ->select('id')
+            ->get()
+            ->each(function ($item, $key) {
+                $item->delete();
+            });
     }
 
 }

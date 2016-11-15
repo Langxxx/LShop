@@ -72,7 +72,7 @@
                 if (g.find("select").length > 0) {
                     var attrID = $(a).attr('attrId');
                     if (attrID) {
-                        var url = "{{ url('admin/goods/ajaxDeleteAttr') }}" + '/' +  attrID;
+                        var url = "{{ url('admin/goods/ajaxDeleteAttr') }}" + '/' +  attrID + '/' + {{ $goods->id }};
                          ajaxDelete(url, '您正在删除一个属性!', '属性已经被删除', function() {
                              g.remove();
                          });
