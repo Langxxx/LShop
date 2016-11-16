@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -29,6 +30,8 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    protected $loginView = 'home.login';
+    protected $registerView = 'home.register';
 
     /**
      * Create a new authentication controller instance.
@@ -68,5 +71,21 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function showLoginForm(Request $request)
+    {
+        if (!empty($request->get('redirectUrl'))) { // 如果有跳转地址的话
+            session(['url.intended' => $request->get('redirectUrl')]);
+        }
+
+        $view = property_exists($this, 'loginView')
+            ? $this->loginView : 'auth.authenticate';
+
+        if (view()->exists($view)) {
+            return view($view);
+        }
+
+        return view('home.login');
     }
 }

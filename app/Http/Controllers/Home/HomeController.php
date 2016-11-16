@@ -27,4 +27,11 @@ class HomeController extends Controller
         $newGoods = $this->goods->getNewGoods();
         return view('home/index', compact('categories', 'hotGoods', 'newGoods'));
     }
+
+    public function goods($goodsID)
+    {
+        $goods = $this->goods->find($goodsID);
+        $attributes = $this->goods->getGoodsAttributesForSelect($goods);
+        return view('home/introduction', compact('goods', 'attributes'));
+    }
 }

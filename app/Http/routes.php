@@ -65,6 +65,12 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
 
 Route::group(['namespace' => 'home'], function () {
     Route::get('/', 'HomeController@index');
+    Route::get('/goods/{goodsID}', 'HomeController@goods');
+
+
+    Route::group(['middleware' => 'auth:web'], function () {
+        Route::resource("/cart", 'CartController');
+    });
 });
 
 Route::auth();
