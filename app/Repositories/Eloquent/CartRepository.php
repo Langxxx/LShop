@@ -16,4 +16,13 @@ class CartRepository extends  Repository
     {
         return Cart::class;
     }
+
+    public function getGoodsList()
+    {
+        return $this->model
+            ->where('user_id', '=', auth()->user()->id)
+            ->select('id', 'number', 'goods_attr_id', 'goods_id')
+            ->with('goods')
+            ->get();
+    }
 }

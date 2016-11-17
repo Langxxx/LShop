@@ -70,6 +70,8 @@ Route::group(['namespace' => 'home'], function () {
 
     Route::group(['middleware' => 'auth:web'], function () {
         Route::resource("/cart", 'CartController');
+        Route::get("/cart/ajaxUpDateCartData/{cartID}/{number}", "CartController@ajaxUpDateCartData");
+        Route::delete("/cart/ajaxUpDateCartData/{cartID}/{number}", "CartController@ajaxUpDateCartData");
     });
 });
 
