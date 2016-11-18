@@ -19,8 +19,7 @@ $(function(){
             ajaxUpDateCartData(cartId, $(amount).val());
         }
         //小计
-        var subtotal = parseFloat($(li).prev(".td-price").find(".price-now").text()) * parseInt($(amount).val());
-
+        var subtotal = parseFloat($(li).prev().find(".price-now").text()) * parseInt($(amount).val());
         $(li).next('.td-sum').find('em').text(subtotal.toFixed(2));
         //总计金额
         var total = 0;
@@ -29,6 +28,7 @@ $(function(){
         });
 
         $("#J_Total").text(total.toFixed(2));
+        $("#J_ActualFee").text(total.toFixed(2));
     });
 
     //增加
@@ -43,14 +43,16 @@ $(function(){
         ajaxUpDateCartData(cartId, $(amount).val());
 
         //小计
-        var subtotal = parseFloat($(li).prev(".td-price").find(".price-now").text()) * parseInt($(amount).val());
+        var subtotal = parseFloat($(li).prev().find(".price-now").text()) * parseInt($(amount).val());
         $(li).next('.td-sum').find('em').text(subtotal.toFixed(2));
         //总计金额
         var total = 0;
         $(".td-sum").find('em').each(function(){
             total += parseFloat($(this).text());
         });
+
         $("#J_Total").text(total.toFixed(2));
+        $("#J_ActualFee").text(total.toFixed(2));
 
     });
 

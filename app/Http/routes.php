@@ -73,6 +73,11 @@ Route::group(['namespace' => 'home'], function () {
         Route::get("/cart/ajaxUpDateCartData/{cartID}/{number}", "CartController@ajaxUpDateCartData");
         Route::delete("/cart/ajaxUpDateCartData/{cartID}/{number}", "CartController@ajaxUpDateCartData");
     });
+    Route::group(['middleware' => 'auth:web'], function () {
+        Route::get("/order/pay/{cartID}", "OrderController@pay");
+        Route::post("/order/{cartIDs}", "OrderController@create");
+        Route::get("/order/success", "OrderController@success");
+    });
 });
 
 Route::auth();

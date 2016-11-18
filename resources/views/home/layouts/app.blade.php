@@ -40,7 +40,7 @@
             </ul>
             <ul class="message-r">
                 <div class="topMessage home">
-                    <div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+                    <div class="menu-hd"><a href="{{ url('/') }}" target="_top" class="h">商城首页</a></div>
                 </div>
                 <div class="topMessage my-shangcheng">
                     <div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -54,9 +54,9 @@
         </div>
         <!--悬浮搜索框-->
         <div class="nav white">
-            <div class="logo"><img src="../images/logo.png" /></div>
+            <div class="logo"><img src="/images/logo.png" /></div>
             <div class="logoBig">
-                <li><img src="../images/logobig.png" /></li>
+                <li><img src="/images/logobig.png" /></li>
             </div>
 
             <div class="search-bar pr">
@@ -79,7 +79,7 @@
                     </a>
                     <div class="ibar_login_box status_login ">
                         <div class="avatar_box ">
-                            <p class="avatar_imgbox "><img src="../images/no-img_mid_.jpg " /></p>
+                            <p class="avatar_imgbox "><img src="/images/no-img_mid_.jpg " /></p>
                             <ul class="user_info ">
                                 <li>用户名：sl1903</li>
                                 <li>级&nbsp;别：普通会员</li>
@@ -124,7 +124,7 @@
 
                 <div id="brand " class="item ">
                     <a href="#">
-                        <span class="wdsc "><img src="../images/wdsc.png " /></span>
+                        <span class="wdsc "><img src="/images/wdsc.png " /></span>
                     </a>
                     <div class="mp_tooltip ">
                         我的收藏
@@ -134,7 +134,7 @@
 
                 <div id="broadcast " class="item ">
                     <a href="# ">
-                        <span class="chongzhi "><img src="../images/chongzhi.png " /></span>
+                        <span class="chongzhi "><img src="/images/chongzhi.png " /></span>
                     </a>
                     <div class="mp_tooltip ">
                         我要充值
@@ -150,7 +150,7 @@
                     <!--二维码 -->
                     <li class="qtitem ">
                         <a href="#none "><span class="mpbtn_qrcode "></span></a>
-                        <div class="mp_qrcode " style="display:none; "><img src="../images/weixin_code_145.png " /><i class="icon_arrow_white "></i></div>
+                        <div class="mp_qrcode " style="display:none; "><img src="/images/weixin_code_145.png " /><i class="icon_arrow_white "></i></div>
                     </li>
                     <li class="qtitem ">
                         <a href="#top " class="return_top "><span class="top "></span></a>

@@ -89,7 +89,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function findWhereIn($field, array $values, $columns = ['*'])
     {
-
+        return $this->model->select($columns)->whereIn($field, $values);
     }
 
     /**
