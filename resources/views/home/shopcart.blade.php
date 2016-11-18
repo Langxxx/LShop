@@ -214,7 +214,7 @@
 					</div>
 					<div class="clear"></div>
 					<div class="btn-op">
-						<div class="btn am-btn am-btn-warning close">确认</div>
+						<div class="btn am-btn am-btn-warning">确认</div>
 						<div class="btn close am-btn am-btn-warning">取消</div>
 					</div>
 
@@ -271,5 +271,7 @@
 				window.location.href = "{{ url('/order') }}" + "/pay/" + cartIDs.toString();
 			}
 		}
+
+		$(".btn-op").find(".btn:first").addClass("")
 	</script>
 @endsection

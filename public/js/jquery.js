@@ -18,10 +18,10 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           t.val(0);
           }
        })
-    }) 
+    });
 
 	
-	<!--兼容IE浏览器 -->
+
 	    if (!document.getElementsByClassName) {
         document.getElementsByClassName = function (cls) {
             var ret = [];
@@ -95,7 +95,8 @@ $(function(){
 				 	}													
 					
 				})
-				$('.theme-poptit .close,.btn-op .close').click(function() {
+				$('.theme-poptit .close,.btn-op .close,.btn-op .am-btn').click(function() {
+
 					$(document.body).css("position","static");
 //					滚动条复位
 					$('.theme-signin-left').scrollTop(0);					

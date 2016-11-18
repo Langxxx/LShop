@@ -51,6 +51,7 @@ class CartController extends Controller
         }
     }
 
+
     public function ajaxUpDateCartData($cartID, $goodsNumber)
     {
         if ($goodsNumber != 0) {
@@ -63,5 +64,11 @@ class CartController extends Controller
                 return response()->json(['status' => false, 'error' => '删除失败']);
             }
         }
+    }
+
+    public function ajaxGetGoodsCount()
+    {
+        $count = $this->cart->findWhere('user_id', auth()->user()->id)->count();
+        return response()->json(['status' => true, 'content' => $count]);
     }
 }

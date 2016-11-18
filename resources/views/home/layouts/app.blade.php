@@ -46,7 +46,11 @@
                     <div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
                 </div>
                 <div class="topMessage mini-cart">
-                    <div class="menu-hd"><a id="mc-menu-hd" href="{{ url('/cart') }}" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+                    <div class="menu-hd">
+                        <a id="mc-menu-hd" href="{{ url('/cart') }}" target="_top">
+                        <i class="am-icon-shopping-cart  am-icon-fw"></i>
+                        <span>购物车</span><strong id="J_MiniCartNum" class="h" style="color: #DC143C;"></strong></a>
+                    </div>
                 </div>
                 <div class="topMessage favorite">
                     <div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -231,6 +235,25 @@
 
 <!--菜单 -->
 @yield('FooterCSSAndJS')
+    <script>
+      @if(auth()->check())
+          {{--$(function() {--}}
+                {{--$.ajax({--}}
+                    {{--type: "get",--}}
+                    {{--headers: {--}}
+                        {{--'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')--}}
+                    {{--},--}}
+                    {{--url: "{{ url('/cart/ajaxGetGoodsCount') }}",--}}
+                    {{--dataType: 'json',--}}
+                    {{--success: function (response) {--}}
+                        {{--if (response['status']) {--}}
+                            {{--$("#J_MiniCartNum").text(response['content']);--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--})--}}
+            {{--});--}}
+        @endif
+    </script>
 </body>
 
 </html>

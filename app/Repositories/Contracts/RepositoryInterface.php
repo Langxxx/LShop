@@ -35,11 +35,11 @@ interface RepositoryInterface
 
     /**
      * 通过传入的where条件查找记录
-     * @param array $where
+     *
      * @param array $columns
      * @return mixed
      */
-    public function findWhere(array $where, $columns = ['*']);
+    public function findWhere($column, $operator = null, $value = null, $columns = ['*']);
 
     /**
      * @param $field

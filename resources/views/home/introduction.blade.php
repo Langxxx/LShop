@@ -20,8 +20,14 @@
 @section('FooterCSSAndJS')
 
     <script>
-        function addCart() {
 
+        $(function() {
+            if (!mobilecheck()) {
+                $("#LikBasket").bind('click', addCart);
+            }
+        });
+
+        function addCart() {
             @if(auth()->check())
                 var mainForm = $("#main_form");
                 var lis = mainForm.find("li");
@@ -52,7 +58,20 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response['status']) {
-                        swal("添加成功!", "商品已经加入购物车.", "success");
+//                        swal("添加成功!", "商品已经加入购物车.", "success");
+                        swal({
+                            title: "添加成功!",
+                            text: "商品已经加入购物车,是否前往购物车?",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3CB371",
+                            confirmButtonText: "前往购物车!",
+                            cancelButtonText: "取消!",
+                            closeOnConfirm: false
+                        },
+                        function(){
+                            window.location.href = "{{  url('/cart')}}";
+                        });
                     }else {
                         swal("添加失败!", response['error'], "error");
                     }
@@ -265,7 +284,7 @@
                                                     {{-- */$isFirst=true;/* --}}
                                                     @foreach($attribute->goodsAttribute as $arrtID => $value)
                                                         @if($isFirst)
-                                                            <li style="color: grey;" class="sku-line selected" attrid="{{ $arrtID }}" >{{ $value }}
+                                                            <li  class="sku-line selected" attrid="{{ $arrtID }}" >{{ $value }}
                                                                 <i></i>
                                                             </li>
                                                             {{-- */$isFirst=false;/* --}}
@@ -297,7 +316,7 @@
                 <div class="clear"></div>
 
                 <div class="btn-op">
-                    <div class="btn am-btn am-btn-warning">确认</div>
+                    <div title="关闭" class="btn am-btn am-btn-warning" onclick="addCart(this)">确认</div>
                     <div class="btn close am-btn am-btn-warning">取消</div>
                 </div>
             </div>
@@ -342,7 +361,7 @@
 
     <div class="pay">
         <div class="pay-opt">
-            <a href="home.html"><span class="am-icon-home am-icon-fw">首页</span></a>
+            <a href="{{ url("/") }}"><span class="am-icon-home am-icon-fw">首页</span></a>
             <a><span class="am-icon-heart am-icon-fw">收藏</span></a>
 
         </div>
@@ -353,7 +372,7 @@
         </li>
         <li>
             <div class="clearfix tb-btn tb-btn-basket theme-login">
-                <a id="LikBasket" title="加入购物车"  onclick="addCart(this)"><i></i>加入购物车</a>
+                <a id="LikBasket" title="加入购物车""><i></i>加入购物车</a>
             </div>
         </li>
     </div>

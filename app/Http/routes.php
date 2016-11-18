@@ -69,9 +69,11 @@ Route::group(['namespace' => 'home'], function () {
 
 
     Route::group(['middleware' => 'auth:web'], function () {
-        Route::resource("/cart", 'CartController');
+        Route::get('/cart', "CartController@index");
+        Route::post('/cart', "CartController@store");
         Route::get("/cart/ajaxUpDateCartData/{cartID}/{number}", "CartController@ajaxUpDateCartData");
         Route::delete("/cart/ajaxUpDateCartData/{cartID}/{number}", "CartController@ajaxUpDateCartData");
+        Route::get("/cart/ajaxGetGoodsCount", "CartController@ajaxGetGoodsCount");
     });
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get("/order/pay/{cartID}", "OrderController@pay");

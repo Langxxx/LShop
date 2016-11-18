@@ -72,13 +72,13 @@ abstract class Repository implements RepositoryInterface
 
     /**
      * 通过传入的where条件查找记录
-     * @param array $where
+
      * @param array $columns
      * @return mixed
      */
-    public function findWhere(array $where, $columns = ['*'])
+    public function findWhere($column, $operator = null, $value = null, $columns = ['*'])
     {
-        return $this->model->select($columns)->where($where)->get();
+        return $this->model->select($columns)->where($column, $operator, $value);
     }
 
     /**
