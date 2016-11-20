@@ -47,6 +47,23 @@
 							</dl>
 						</li>
 						<div class="clear"></div>
+
+						<li class="select-list">
+							<dl id="select_price" class="attr_select">
+								<dt class="am-badge am-round">价格</dt>
+
+								<div class="dd-conent">
+									<dd {{ \Illuminate\Support\Facades\Input::get('price') == null ? 'class=selected' : "" }}><a href="{{ route('search', ['category_id' => $category->id]) }}">全部</a></dd>
+									@foreach($priceArray as $price)
+										<dd {{ \Illuminate\Support\Facades\Input::get('price') == $price ? 'class=selected' : "" }} >
+											<a href="{{ route('search', ['category_id' => $category->id, 'price' => $price]) }}">{{ $price }}</a>
+										</dd>
+									@endforeach
+								</div>
+
+							</dl>
+						</li>
+
 						@foreach($category->search_types as $search_type)
 							@foreach($search_type['type']['attributes'] as $index => $attr)
 								@if( strpos(',' . $category->search_attr_id . ',', ',' . $attr['id'] . ',') !== false)
@@ -66,38 +83,12 @@
 								@endif
 							@endforeach
 						@endforeach
-						{{--<li class="select-list">--}}
-							{{--<dl id="select2">--}}
-								{{--<dt class="am-badge am-round">种类</dt>--}}
-								{{--<div class="dd-conent">--}}
-									{{--<dd class="select-all selected"><a href="#">全部</a></dd>--}}
-									{{--<dd><a href="#">东北松子</a></dd>--}}
-									{{--<dd><a href="#">巴西松子</a></dd>--}}
-									{{--<dd><a href="#">夏威夷果</a></dd>--}}
-									{{--<dd><a href="#">松子</a></dd>--}}
-								{{--</div>--}}
-							{{--</dl>--}}
-						{{--</li>--}}
-						{{--<li class="select-list">--}}
-							{{--<dl id="select3">--}}
-								{{--<dt class="am-badge am-round">选购热点</dt>--}}
-								{{--<div class="dd-conent">--}}
-									{{--<dd class="select-all selected"><a href="#">全部</a></dd>--}}
-									{{--<dd><a href="#">手剥松子</a></dd>--}}
-									{{--<dd><a href="#">薄壳松子</a></dd>--}}
-									{{--<dd><a href="#">进口零食</a></dd>--}}
-									{{--<dd><a href="#">有机零食</a></dd>--}}
-								{{--</div>--}}
-							{{--</dl>--}}
-						{{--</li>--}}
-
 					</ul>
 					<div class="clear"></div>
 				</div>
 				<div class="search-content">
 					<div class="sort">
-						<li class="first"><a title="综合">综合排序</a></li>
-						<li><a title="销量">销量排序</a></li>
+						<li class="first"><a title="销量">销量排序</a></li>
 						<li><a title="价格">价格优先</a></li>
 						<li class="big"><a title="评价" href="#">评价为主</a></li>
 					</div>
@@ -107,7 +98,7 @@
 						@foreach($allGoods as $goods)
 						<li>
 							<div class="i-pic limit">
-								<img src="../images/imgsearch1.jpg" />
+								<img src="/images/imgsearch1.jpg" />
 								<p class="title fl">{{ $goods->name }}</p>
 								<p class="price fl">
 									<b>¥</b>
@@ -129,7 +120,7 @@
 
 					<li>
 						<div class="i-pic check">
-							<img src="../images/cp.jpg" />
+							<img src="/images/cp.jpg" />
 							<p class="check-title">萨拉米 1+1小鸡腿</p>
 							<p class="price fl">
 								<b>¥</b>
@@ -142,7 +133,7 @@
 					</li>
 					<li>
 						<div class="i-pic check">
-							<img src="../images/cp2.jpg" />
+							<img src="/images/cp2.jpg" />
 							<p class="check-title">ZEK 原味海苔</p>
 							<p class="price fl">
 								<b>¥</b>
@@ -155,7 +146,7 @@
 					</li>
 					<li>
 						<div class="i-pic check">
-							<img src="../images/cp.jpg" />
+							<img src="/images/cp.jpg" />
 							<p class="check-title">萨拉米 1+1小鸡腿</p>
 							<p class="price fl">
 								<b>¥</b>
@@ -182,28 +173,7 @@
 
 			</div>
 		</div>
-		<div class="footer">
-			<div class="footer-hd">
-				<p>
-					<a href="#">恒望科技</a>
-					<b>|</b>
-					<a href="#">商城首页</a>
-					<b>|</b>
-					<a href="#">支付宝</a>
-					<b>|</b>
-					<a href="#">物流</a>
-				</p>
-			</div>
-			<div class="footer-bd">
-				<p>
-					<a href="#">关于恒望</a>
-					<a href="#">合作伙伴</a>
-					<a href="#">联系我们</a>
-					<a href="#">网站地图</a>
-					<em>© 2015-2025 Hengwang.com 版权所有</em>
-				</p>
-			</div>
-		</div>
+		@include('home.layouts.footer')
 	</div>
 
 </div>
@@ -221,7 +191,7 @@
 				</a>
 				<div class="ibar_login_box status_login">
 					<div class="avatar_box">
-						<p class="avatar_imgbox"><img src="../images/no-img_mid_.jpg" /></p>
+						<p class="avatar_imgbox"><img src="/images/no-img_mid_.jpg" /></p>
 						<ul class="user_info">
 							<li>用户名：sl1903</li>
 							<li>级&nbsp;别：普通会员</li>
@@ -266,7 +236,7 @@
 
 			<div id="brand" class="item">
 				<a href="#">
-					<span class="wdsc"><img src="../images/wdsc.png" /></span>
+					<span class="wdsc"><img src="/images/wdsc.png" /></span>
 				</a>
 				<div class="mp_tooltip">
 					我的收藏
@@ -276,7 +246,7 @@
 
 			<div id="broadcast" class="item">
 				<a href="#">
-					<span class="chongzhi"><img src="../images/chongzhi.png" /></span>
+					<span class="chongzhi"><img src="/images/chongzhi.png" /></span>
 				</a>
 				<div class="mp_tooltip">
 					我要充值
@@ -292,7 +262,7 @@
 				<!--二维码 -->
 				<li class="qtitem">
 					<a href="#none"><span class="mpbtn_qrcode"></span></a>
-					<div class="mp_qrcode" style="display:none;"><img src="../images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
+					<div class="mp_qrcode" style="display:none;"><img src="/images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
 				</li>
 				<li class="qtitem">
 					<a href="#top" class="return_top"><span class="top"></span></a>
@@ -373,11 +343,11 @@
 <script>
 	window.jQuery || document.write('<script src="basic/js/jquery-1.9.min.js"><\/script>');
 </script>
-<script type="text/javascript" src="../basic/js/quick_links.js"></script>
+<script type="text/javascript" src="/basic/js/quick_links.js"></script>
 @endsection
 @section('HeaderCSSAndJS')
-	<link href="../css/seastyle.css" rel="stylesheet" type="text/css" />
+	<link href="/css/seastyle.css" rel="stylesheet" type="text/css" />
 
-	<script type="text/javascript" src="../basic/js/jquery-1.7.min.js"></script>
-	<script type="text/javascript" src="../js/script.js"></script>
+	<script type="text/javascript" src="/basic/js/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="/js/script.js"></script>
 @endsection

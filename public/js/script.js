@@ -91,28 +91,28 @@ $(document).ready(function() {
 	$(".attr_select dd").click(function() {
 		$(this).addClass("selected").siblings().removeClass("selected");
 
-		var identifier = $(this).closest('dl').attr("id");
-		var resultSelectID = "#" + identifier + "_selected";
-		if ($(this).hasClass("select-all")) {
-			$(resultSelectID).remove();
-		} else {
-			var copyThisC = $(this).clone();
-
-			if ($(resultSelectID).length > 0) {
-				$(resultSelectID + " a").html($(this).text());
-			} else {
-				copyThisC.addClass("result_select");
-				$(".select-result dl").append(copyThisC.attr("id", identifier + "_selected"));
-			}
-		}
+		//var identifier = $(this).closest('dl').attr("id");
+		//var resultSelectID = "#" + identifier + "_selected";
+		//if ($(this).hasClass("select-all")) {
+		//	$(resultSelectID).remove();
+		//} else {
+		//	var copyThisC = $(this).clone();
+        //
+		//	if ($(resultSelectID).length > 0) {
+		//		$(resultSelectID + " a").html($(this).text());
+		//	} else {
+		//		//copyThisC.addClass("result_select");
+		//		//$(".select-result dl").append(copyThisC.attr("id", identifier + "_selected"));
+		//	}
+		//}
 	});
 
-	$(".result_select").live("click", function() {
-		var id = $(this).attr('id').replace(/[^0-9]/ig,"");
-		console.log(id);
-		$(this).remove();
-		$("#select" + id + " .select-all").addClass("selected").siblings().removeClass("selected");
-	});
+	//$(".result_select").live("click", function() {
+	//	var id = $(this).attr('id').replace(/[^0-9]/ig,"");
+	//	console.log(id);
+	//	$(this).remove();
+	//	$("#select" + id + " .select-all").addClass("selected").siblings().removeClass("selected");
+	//});
 
 	//$("#selectA").live("click", function() {
 	//	$(this).remove();

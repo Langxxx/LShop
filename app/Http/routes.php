@@ -85,7 +85,7 @@ Route::group(['namespace' => 'home'], function () {
         Route::get("/order/success", "OrderController@success");
     });
 
-    Route::get('/search/{categoryID}', "SearchController@search");
+    Route::get('/search', ['uses'=>'SearchController@search','as'=>'search']);
 
 });
 
