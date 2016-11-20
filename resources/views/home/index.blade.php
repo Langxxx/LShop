@@ -53,7 +53,7 @@
 																<dl class="dl-sort">
 																	<dt><span title="蛋糕">{{ $level2->name }}</span></dt>
 																	@foreach($level2->children as $level3)
-																		<dd><a title="蒸蛋糕" href="#"><span>{{ $level3->name }}</span></a></dd>
+																		<dd><a title="蒸蛋糕" href="{{ url('/search/' . $level3->id) }}"><span>{{ $level3->name }}</span></a></dd>
 																	@endforeach
 																</dl>
 															@endforeach

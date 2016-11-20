@@ -46,6 +46,10 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
     Route::get('attribute/{typeID}/create', ['as' => 'admin.attribute.create', 'uses' =>
         'AttributeController@create']);
 
+    Route::get('category/ajaxGetAttrForSelect/{typeID}', ['as' => 'admin.category.ajaxGetAttrForSelect', 'uses' =>
+        'CategoryController@ajaxGetAttrForSelect']);
+
+
     Route::get('goods/ajaxGetAttr/{typeID}', ['as' => 'admin.goods.ajaxGetAttr', 'uses' =>
         'GoodsController@ajaxGetAttr']);
     Route::delete('goods/ajaxDeleteAttr/{attrID}/{goodsID}', ['as' => 'admin.goods.ajaxDeleteAttr', 'uses' =>
@@ -80,6 +84,9 @@ Route::group(['namespace' => 'home'], function () {
         Route::post("/order/{cartIDs}", "OrderController@create");
         Route::get("/order/success", "OrderController@success");
     });
+
+    Route::get('/search/{categoryID}', "SearchController@search");
+
 });
 
 Route::auth();

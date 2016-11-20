@@ -18,6 +18,68 @@
         $(".js-example-basic-single").select2({
             placeholder : '请选择分类'
         });
+        $(".js-example-type-single").select2({
+        });
+        $(".js-example-attr-multiple").select2({
+            placeholder : '请选择属性'
+        });
+    </script>
+    <script>
+        $("select[name=type_id]").change(function() {
+
+            var typeID = $(this).val();
+            var _this = $(this);
+            var nextSelect = _this.parent().next("div").find('select');
+
+            if (typeID == 0) {
+                nextSelect.remove();
+                return;
+            }
+            var opt =  "<option value=''>选择属性</option>";
+            $.ajax({
+                type: "GET",
+                url: "{{ url('admin/category/ajaxGetAttrForSelect') }}" + '/' +  typeID,
+                dateType: 'json',
+                success: function (response) {
+                    if (response['status']) {
+
+                        $(response['content']).each(function(k, v) {
+                            opt += "<option value='" + v.id + "'>" + v.name + "</option>"
+                        });
+
+                    }
+                    nextSelect.html(opt);
+                }
+            });
+
+        });
+        function addNew(a) {
+            var g = $(a).parent().parent();
+
+            if ($(a).html() == "[+]") {
+
+                g.find('select').each(function (k, v) {
+                    $(v).select2('destroy');
+                });
+
+
+                var newP = g.clone(true,true);
+                newP.find("a").html("[-]");
+                g.after(newP);
+
+                g.find('select').each(function (k, v) {
+                    $(v).select2();
+                });
+                newP.find('select').each(function (k, v) {
+                    $(v).select2();
+                });
+            }else {
+                g.remove();
+            }
+
+        }
+
+        //        $('#type_id').trigger('change');
     </script>
 @endsection
 @section('content')
@@ -36,16 +98,50 @@
                             @endforeach
                         </ul>
                     @endif
-                    {!! Form::open(['url' => '/admin/category/' . $category->id, 'method' => 'put']) !!}
-                    <div class="form-group">
-                        {!! Form::label('name', '商品分类名称') !!}
-                        {!! Form::text('name', $category->name, ['class' => 'form-control', 'placeholder' => '列如: admin']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('parent_id', '父级分类') !!}
-                        {!! Form::select('parent_id', $categories, $category->parent_id, ['class' => 'form-control js-example-basic-single' ]) !!}
-                    </div>
+                    {!! Form::open(['url' => '/admin/category/' . $category->id, 'method' => 'put','class' => 'form-horizontal']) !!}
+                        <div class="form-group">
+                            {!! Form::label('name', '商品分类名称',['class' => 'col-sm-2 control-label' ]) !!}
+                            <div class="col-sm-5">
+                                {!! Form::text('name',  $category->name, ['class' => 'form-control', 'placeholder' => '列如: admin']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('parent_id', '父级分类',['class' => 'col-sm-2 control-label' ]) !!}
+                            <div class="col-sm-5">
+                                {!! Form::select('parent_id', $categories,  $category->parent_id, ['class' => 'form-control js-example-basic-single' ]) !!}
+                            </div>
+                        </div>
 
+                        @if(count($category->search_types) == 0)
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><a onclick="addNew(this)" href="javascript:void(0);">[+]</a>搜索属性</label>
+                                <div class="col-sm-3">
+                                    {!! Form::select('type_id', $types, null, ['class' => 'form-control js-example-type-single' ]) !!}
+                                </div>
+                                <div class="col-sm-7">
+                                    {!! Form::select('attr_id[]', [], null, ['class' => 'form-control js-example-attr-multiple', 'multiple' => 'multiple' ]) !!}
+                                </div>
+                            </div>
+                        @endif
+
+                        @foreach($category->search_types as $index => $search_type)
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><a onclick="addNew(this)" href="javascript:void(0);">{{ $index == 0 ? '[+]' : '[-]' }}</a>搜索属性</label>
+                            <div class="col-sm-3">
+                                {!! Form::select('type_id', $types, $search_type['type']['id'], ['class' => 'form-control js-example-type-single' ]) !!}
+                            </div>
+                            <div class="col-sm-7">
+{{--                                {!! Form::select('attr_id[]', $search_type->type()->first()->attributes()->pluck('name', 'id'),--}}
+{{--                                 explode(',', $category->search_attr_id), ['class' => 'form-control js-example-attr-multiple', 'multiple' => 'multiple' ]) !!}--}}
+                                {!! Form::select('attr_id[]', $search_type['type']['attributes']['selectAttr'],
+                               explode(',', $category->search_attr_id), ['class' => 'form-control js-example-attr-multiple', 'multiple' => 'multiple' ]) !!}
+
+                            </div>
+
+                        </div>
+
+                        @endforeach
                     <!-- Change this to a button or input when using this as a form -->
                     <a onclick="$('form').submit()" class="btn btn-success btn-block">添加商品分类</a>
 

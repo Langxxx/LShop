@@ -9,6 +9,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Category;
 use App\Repositories\Eloquent\Repository;
+use Illuminate\Support\Facades\DB;
 
 class CategoryRepository extends  Repository
 {
@@ -46,18 +47,36 @@ class CategoryRepository extends  Repository
 
     public function create(array $attributes)
     {
+        $attributes['search_attr_id'] = implode(',', array_unique($attributes['attr_id']));
+
+        unset($attributes['type_id']);
+        unset($attributes['attr_id']);
+
         $parent = $this->model->find($attributes['parent_id']);
         return $parent->children()->create($attributes);
     }
 
     public function find($id, $columns = ['*'])
     {
-        $cat = $this->model->find($id);
+        $cat = parent::find($id);
+//        $cat->search_types = DB::table('attributes')->select()
+//            ->whereIn('id', explode(',', $cat->search_attr_id))
+//            ->groupBy('type_id')
+//            ->get();
+//        dd($cat->search_types);
+//        foreach ($cat->search_types as $search_type) {
+//
+//        }
         return $cat;
     }
 
     public function update($id, array $attributes)
     {
+        $attributes['search_attr_id'] = implode(',', array_unique($attributes['attr_id']));
+
+        unset($attributes['type_id']);
+        unset($attributes['attr_id']);
+
         $cat = $this->find($id);
         if ($cat->parent_id != $attributes['parent_id']) {
             //更改了父级分类
