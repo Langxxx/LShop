@@ -33,6 +33,11 @@ class SearchController extends Controller
             ->find($categoryID);
         $category->search_types = $this->attribute
             ->getSearchInfoByAttrIDs($category->search_attr_id, false);
-        return view('home.search', compact('category'));
+
+        //取出商品数据
+        $allGoods = $category->goods()->get();
+
+//        dd($category);
+        return view('home.search', compact('category', 'allGoods'));
     }
 }

@@ -82,4 +82,9 @@ class Category extends Node
     // Please refer the Laravel documentation for further instructions on how
     // to hook your own callbacks/observers into this events:
     // http://laravel.com/docs/5.0/eloquent#model-events
+
+     public function goods()
+     {
+         return $this->hasMany('App\Models\goods')->select('id', 'sm_logo', 'name', 'shop_price');
+     }
 }

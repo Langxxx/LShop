@@ -49,19 +49,21 @@
 						<div class="clear"></div>
 						@foreach($category->search_types as $search_type)
 							@foreach($search_type['type']['attributes'] as $index => $attr)
-							<li class="select-list">
-							<dl id="select{{$index+1}}" class="attr_select">
-								<dt class="am-badge am-round">{{ $attr['name'] }}</dt>
+								@if( strpos(',' . $category->search_attr_id . ',', ',' . $attr['id'] . ',') !== false)
+								<li class="select-list">
+									<dl id="select{{$index+1}}" class="attr_select">
+										<dt class="am-badge am-round">{{ $attr['name'] }}</dt>
 
-								<div class="dd-conent">
-									<dd class="select-all selected"><a href="#">全部</a></dd>
-										@foreach(explode(',', $attr['option_value']) as $attrValue)
-										<dd><a href="#">{{ $attrValue }}</a></dd>
-										@endforeach
-								</div>
+										<div class="dd-conent">
+											<dd class="select-all selected"><a href="#">全部</a></dd>
+												@foreach(explode(',', $attr['option_value']) as $attrValue)
+												<dd><a href="#">{{ $attrValue }}</a></dd>
+												@endforeach
+										</div>
 
-							</dl>
-						</li>
+									</dl>
+								</li>
+								@endif
 							@endforeach
 						@endforeach
 						{{--<li class="select-list">--}}
@@ -102,173 +104,21 @@
 					<div class="clear"></div>
 
 					<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+						@foreach($allGoods as $goods)
 						<li>
 							<div class="i-pic limit">
 								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
+								<p class="title fl">{{ $goods->name }}</p>
 								<p class="price fl">
 									<b>¥</b>
-									<strong>56.90</strong>
+									<strong>{{ $goods->shop_price }}</strong>
 								</p>
 								<p class="number fl">
 									销量<span>1110</span>
 								</p>
 							</div>
 						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
-						<li>
-							<div class="i-pic limit">
-
-								<img src="../images/imgsearch1.jpg" />
-								<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>56.90</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
-						</li>
+						@endforeach
 					</ul>
 				</div>
 				<div class="search-side">

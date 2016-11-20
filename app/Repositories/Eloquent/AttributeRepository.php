@@ -21,12 +21,9 @@ class AttributeRepository extends  Repository
     {
         $searchInfo = $this->findWhereIn('id', explode(',', $searchAttrIDs))
             ->with('type')
-            ->with(['type.attributes' => function($query) {
-                $query->where('attributes.option_value', '!=', '');
-            }])
+            ->with('type.attributes')
             ->groupBy('type_id')
             ->get();
-
         foreach ($searchInfo as $index => $search_type) {
             $type = $search_type->relationsToArray();
 
