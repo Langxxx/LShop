@@ -83,9 +83,9 @@ class SearchService
                     $html .= '<div class="dd-conent">';
 
                     $parameter = ['category_id' => $categoryInfo->id];
-                    if ($price = Input::get('price')) {
-                        $parameter['price'] = $price;
-                    }
+//                    if ($price = Input::get('price')) {
+//                        $parameter['price'] = $price;
+//                    }
                     $tempAttrSearchArray = $attrSearchArray;
                     $tempAttrSearchArray[$indexAttr] = 0;
                     $parameter['search_attr'] = implode('_', $tempAttrSearchArray);
@@ -100,9 +100,9 @@ class SearchService
                     foreach (explode(',', $attr['option_value']) as $attrValue) {
 
                         $parameter = ['category_id' => $categoryInfo->id];
-                        if ($price = Input::get('price')) {
-                            $parameter['price'] = $price;
-                        }
+//                        if ($price = Input::get('price')) {
+//                            $parameter['price'] = $price;
+//                        }
                         $tempAttrSearchArray = $attrSearchArray;
                         $tempAttrSearchArray[$indexAttr] = $attr['id'] . '-' . $attrValue;
                         $parameter['search_attr'] = implode('_', $tempAttrSearchArray);

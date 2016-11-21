@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class SearchController extends Controller
@@ -37,9 +38,48 @@ class SearchController extends Controller
         $category->search_types = $this->attribute
             ->getSearchInfoByAttrIDs($category->search_attr_id, false);
 
+
+
+        //搜索属性
+        $searchAttrs = Input::get('search_attr');
+        $goodsIDs = null;
+        if ($searchAttrs) {
+            $searchAttrs = explode('_', $searchAttrs);
+
+            foreach ($searchAttrs as $searchAttr) {
+
+                if ($searchAttr == '0') {
+                    continue;
+                }
+
+                $searchInfo = explode('-', $searchAttr);
+
+                $tempSearch = DB::table('goods_attribute')->select(DB::raw('GROUP_CONCAT(goods_id) goods_id'))
+                    ->where('attribute_id', $searchInfo[0])
+                    ->where('attr_value', $searchInfo[1])
+                    ->first();
+
+                $tempSearch = $tempSearch->goods_id;
+                if ($goodsIDs == null) {
+                    $goodsIDs = explode(',', $tempSearch);
+                }else {
+                    $tempSearch = explode(',', $tempSearch);
+                    $goodsIDs = array_intersect($goodsIDs, $tempSearch);
+                    if (empty($goodsIDs)) {
+                        $goodsIDs[] = 0;
+                        break;
+                    }
+                }
+            }
+        }
+
         //取出商品数据
         $allGoods = $category->goods()
+            ->when($goodsIDs, function ($query) use ($goodsIDs) {
+                return $query->whereIn('id', $goodsIDs);
+            })
             ->get();
+
 
         //取出价格区间
         $priceArray = $this->getPriceSection($allGoods);
