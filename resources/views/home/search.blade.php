@@ -33,56 +33,62 @@
 						{{--<a title="鸡腿" href="#">豆干</a>--}}
 
 					{{--</div>--}}
+
 					<ul class="select">
-						<p class="title font-normal">
-							<span class="fl">松子</span>
-							<span class="total fl">搜索到<strong class="num">997</strong>件相关商品</span>
-						</p>
+						{{--<p class="title font-normal">--}}
+							{{--<span class="fl">松子</span>--}}
+							{{--<span class="total fl">搜索到<strong class="num">997</strong>件相关商品</span>--}}
+						{{--</p>--}}
+						{{--<div class="clear"></div>--}}
+						{{--<li class="select-result">--}}
+							{{--<dl>--}}
+								{{--<dt>已选</dt>--}}
+								{{--<dd class="select-no"></dd>--}}
+								{{--<p class="eliminateCriteria">清除</p>--}}
+							{{--</dl>--}}
+						{{--</li>--}}
 						<div class="clear"></div>
-						<li class="select-result">
-							<dl>
-								<dt>已选</dt>
-								<dd class="select-no"></dd>
-								<p class="eliminateCriteria">清除</p>
-							</dl>
-						</li>
-						<div class="clear"></div>
 
-						<li class="select-list">
-							<dl id="select_price" class="attr_select">
-								<dt class="am-badge am-round">价格</dt>
 
-								<div class="dd-conent">
-									<dd {{ \Illuminate\Support\Facades\Input::get('price') == null ? 'class=selected' : "" }}><a href="{{ route('search', ['category_id' => $category->id]) }}">全部</a></dd>
-									@foreach($priceArray as $price)
-										<dd {{ \Illuminate\Support\Facades\Input::get('price') == $price ? 'class=selected' : "" }} >
-											<a href="{{ route('search', ['category_id' => $category->id, 'price' => $price]) }}">{{ $price }}</a>
-										</dd>
-									@endforeach
-								</div>
 
-							</dl>
-						</li>
+						{{--<li class="select-list">--}}
+							{{--<dl id="select_price" class="attr_select">--}}
+								{{--<dt class="am-badge am-round">价格</dt>--}}
 
-						@foreach($category->search_types as $search_type)
-							@foreach($search_type['type']['attributes'] as $index => $attr)
-								@if( strpos(',' . $category->search_attr_id . ',', ',' . $attr['id'] . ',') !== false)
-								<li class="select-list">
-									<dl id="select{{$index+1}}" class="attr_select">
-										<dt class="am-badge am-round">{{ $attr['name'] }}</dt>
+								{{--<div class="dd-conent">--}}
+									{{--<dd {{ \Illuminate\Support\Facades\Input::get('price') == null ? 'class=selected' : "" }}><a href="{{ route('search', ['category_id' => $category->id]) }}">全部</a></dd>--}}
+									{{--@foreach($priceArray as $price)--}}
+										{{--<dd {{ \Illuminate\Support\Facades\Input::get('price') == $price ? 'class=selected' : "" }} >--}}
+											{{--<a href="{{ route('search', ['category_id' => $category->id, 'price' => $price]) }}">{{ $price }}</a>--}}
+										{{--</dd>--}}
+									{{--@endforeach--}}
+								{{--</div>--}}
 
-										<div class="dd-conent">
-											<dd class="select-all selected"><a href="#">全部</a></dd>
-												@foreach(explode(',', $attr['option_value']) as $attrValue)
-												<dd><a href="#">{{ $attrValue }}</a></dd>
-												@endforeach
-										</div>
+							{{--</dl>--}}
+						{{--</li>--}}
 
-									</dl>
-								</li>
-								@endif
-							@endforeach
-						@endforeach
+						@inject('searchService', 'App\Services\SearchService')
+						{!! $searchService->getSearchPanel($priceArray, $category) !!}
+
+						{{--@foreach($category->search_types as $search_type)--}}
+							{{--@foreach($search_type['type']['attributes'] as $index => $attr)--}}
+								{{--@if( strpos(',' . $category->search_attr_id . ',', ',' . $attr['id'] . ',') !== false)--}}
+								{{--<li class="select-list">--}}
+									{{--<dl id="select{{$index+1}}" class="attr_select">--}}
+										{{--<dt class="am-badge am-round">{{ $attr['name'] }}</dt>--}}
+
+										{{--<div class="dd-conent">--}}
+											{{--<dd class="select-all selected"><a href="#">全部</a></dd>--}}
+											{{--@foreach(explode(',', $attr['option_value']) as $attrValue)--}}
+											{{--<dd><a href="#">{{ $attrValue }}</a></dd>--}}
+											{{--@endforeach--}}
+										{{--</div>--}}
+
+									{{--</dl>--}}
+								{{--</li>--}}
+								{{--@endif--}}
+							{{--@endforeach--}}
+						{{--@endforeach--}}
 					</ul>
 					<div class="clear"></div>
 				</div>
