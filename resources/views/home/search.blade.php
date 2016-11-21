@@ -26,27 +26,27 @@
 		<div class="am-g am-g-fixed">
 			<div class="am-u-sm-12 am-u-md-12">
 				<div class="theme-popover">
-					{{--<div class="searchAbout">--}}
-						{{--<span class="font-pale">相关搜索：</span>--}}
-						{{--<a title="坚果" href="#">坚果</a>--}}
-						{{--<a title="瓜子" href="#">瓜子</a>--}}
-						{{--<a title="鸡腿" href="#">豆干</a>--}}
+					<div class="searchAbout">
+						<span class="font-pale">相关搜索：</span>
+						<a title="坚果" href="#">坚果</a>
+						<a title="瓜子" href="#">瓜子</a>
+						<a title="鸡腿" href="#">豆干</a>
 
-					{{--</div>--}}
+					</div>
 
 					<ul class="select">
-						{{--<p class="title font-normal">--}}
+						<p class="title font-normal">
 							{{--<span class="fl">松子</span>--}}
 							{{--<span class="total fl">搜索到<strong class="num">997</strong>件相关商品</span>--}}
-						{{--</p>--}}
-						{{--<div class="clear"></div>--}}
-						{{--<li class="select-result">--}}
-							{{--<dl>--}}
+						</p>
+						<div class="clear"></div>
+						<li class="select-result">
+							<dl>
 								{{--<dt>已选</dt>--}}
 								{{--<dd class="select-no"></dd>--}}
 								{{--<p class="eliminateCriteria">清除</p>--}}
-							{{--</dl>--}}
-						{{--</li>--}}
+							</dl>
+						</li>
 						<div class="clear"></div>
 
 

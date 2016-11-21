@@ -39,7 +39,7 @@ class SearchService
     {
         $html = '';
         $html .= '<li class="select-list">';
-        $html .= '<dl id="select_price" class="attr_select">';
+        $html .= '<dl id="select_1" class="attr_select">';
         $html .= '<dt class="am-badge am-round">价格</dt>';
         $html .= '<div class="dd-conent">';
 
@@ -48,8 +48,11 @@ class SearchService
         $parameter['search_attr'] = implode('_', $attrSearchArray);
         $url = route('search', $parameter);
 
-        $class = $price == null ? 'class=selected' : "";
-        $html .= '<dd ' . $class . '><a href="' . $url . '">全部</a></dd>';
+        if ($price == null) {
+            $html .= '<dd class="select-all selected" ><a href="' . $url . '">全部</a></dd>';
+        }else {
+            $html .= '<dd class="select-all" ><a href="' . $url . '">全部</a></dd>';
+        }
 
         foreach ($priceInfo as $currentPrice) {
 
@@ -78,7 +81,7 @@ class SearchService
             foreach ($searchType['type']['attributes'] as $attr) {
                 if (in_array($attr['id'], $attrData) !== false) {
                     $html .= '<li class="select-list">';
-                    $html .= '<dl id="select_price" class="attr_select">';
+                    $html .= '<dl id="' . 'select' . ($indexAttr+2) . '" class="attr_select">';
                     $html .= '<dt class="am-badge am-round">' . $attr['name'] . '</dt>';
                     $html .= '<div class="dd-conent">';
 
