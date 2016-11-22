@@ -10,7 +10,7 @@ use App\Http\Requests;
 use App\Http\Requests\Admin\Attribute\UpdateRequest;
 use App\Http\Requests\Admin\Attribute\CreateRequest;
 
-class AttributeController extends Basecontroller
+class AttributeController extends BaseController
 {
     protected $attribute;
     protected $type;

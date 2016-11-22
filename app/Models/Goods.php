@@ -11,7 +11,7 @@ class Goods extends Model
     public $timestamps = false;
 //    protected $guarded = ['id'];
     protected $fillable = ['pic', 'name', 'market_price', 'shop_price', 'logo', 'sm_logo',
-        'goods_desc', 'is_hot', 'is_new', 'is_best', 'is_delete', 'sort_num', 'type_id',
+        'goods_desc', 'is_hot', 'is_new', 'is_best', 'is_delete','is_on_sale', 'sort_num', 'type_id',
         'category_id', 'brand_id', 'create_at'
     ];
 

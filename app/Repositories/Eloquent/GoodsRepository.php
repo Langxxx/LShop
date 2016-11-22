@@ -24,7 +24,7 @@ class GoodsRepository extends  Repository
     {
 //        dd($attributes);
         if (isset($attributes['logo'])) {
-            $ret = uploadOne($attributes['logo'], 'goods/', 90, [[200, 200]]);
+            $ret = uploadOne($attributes['logo'], 'goods/', 90, [[60, 60]]);
             if ($ret['status']) {
                 $attributes['logo'] = $ret['images'][0];
                 $attributes['sm_logo'] = $ret['images'][1];
@@ -68,7 +68,7 @@ class GoodsRepository extends  Repository
                     continue;
                 }
                 //上传图片
-                $ret = uploadOne($pic, 'goods/', 90, [[200, 200]]);
+                $ret = uploadOne($pic, 'goods/', 90, [[60, 60]]);
                 if ($ret['status']) {
                     $goods->pics()->create([
                         'pic' => $ret['images'][0],
@@ -286,7 +286,7 @@ class GoodsRepository extends  Repository
     {
         return $this->model->where('is_on_sale', '=', '1')
             ->where($column, $operator, $value)
-            ->select('id', 'name', 'shop_price')
+            ->select('id', 'name', 'shop_price', 'sm_logo')
             ->orderBy('created_at', 'desc')
             ->take($limit)
             ->get();

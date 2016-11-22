@@ -93,7 +93,7 @@
 			<!--小导航 -->
 			<div class="am-g am-g-fixed smallnav">
 				<div class="am-u-sm-3">
-					<a href="sort.html"><img src="../images/navsmall.jpg" />
+					<a href="#"><img src="../images/navsmall.jpg" />
 						<div class="title">商品分类</div>
 					</a>
 				</div>
@@ -251,7 +251,7 @@
 					<li>
 						<div class="list ">
 							<a href="{{ url('/goods/' . $goods->id) }}">
-								<img src="../images/cp.jpg " />
+								{{ showImg($goods->sm_logo) }}
 								<div class="pro-title ">{{ $goods->name }}</div>
 								<span class="e-price ">{{ $goods->shop_price }}</span>
 							</a>
@@ -275,8 +275,8 @@
 				@foreach($newGoods as $goods)
 					<li>
 						<div class="list ">
-							<a href="# ">
-								<img src="../images/cp.jpg " />
+							<a href="{{ url('/goods/' . $goods->id) }} ">
+								{{ showImg($goods->sm_logo) }}
 								<div class="pro-title ">{{ $goods->name }}</div>
 								<span class="e-price ">{{ $goods->shop_price }}</span>
 							</a>

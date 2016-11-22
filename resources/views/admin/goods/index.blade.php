@@ -22,8 +22,8 @@
                             <thead>
                             <tr>
                                 <th>商品名称</th>
-                                <th>本店价</th>
                                 <th>市场价</th>
+                                <th>本店价</th>
                                 <th>logo</th>
                                 <th>热卖</th>
                                 <th>新品</th>

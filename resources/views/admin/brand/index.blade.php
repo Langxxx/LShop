@@ -35,7 +35,7 @@
                                 <tr>
                                     <td>{{ $brand->name }}</td>
                                     <td>{{ $brand->url }}</td>
-                                    <td>{{ showImg($brand->logo) }}</td>
+                                    <td>{{ showImg($brand->logo, 50, 50) }}</td>
                                     <td><a href="{{ url('admin/brand/' . $brand->id . '/edit') }}">编辑</a> |
                                         <a href="#">移除</a></td>
                                 </tr>

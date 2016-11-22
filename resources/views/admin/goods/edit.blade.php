@@ -48,16 +48,26 @@
             if ($(a).html() == "[+]") {
                 var newP = g.clone();
 
-                if  (newP.find("select").length > 0) {
-                    var oldName = newP.find("select").attr("name");
-                    var newName = oldName.replace("old_", "");
-                    newName = newName.slice(0, newName.indexOf(']') + 1) + '[]';
-                    newP.find("select").attr("name", newName);
+                if  ($(a).parent().text().indexOf('相册') == -1) {
 
-                    var oldInputName = newP.find("input").attr("name");
-                    var newInputName = oldInputName.replace("old_", "");
-                    newInputName = newInputName.slice(0, newInputName.indexOf(']') + 1) + '[]';
-                    newP.find("input").attr("name", newInputName);
+                    var oldName = newP.find("select").attr("name");
+                    if (oldName) {
+                        var newName = oldName.replace("old_", "");
+                        newName = newName.slice(0, newName.indexOf(']') + 1) + '[]';
+                        newP.find("select").attr("name", newName);
+                    }
+
+                    newP.find("input").each(function (k, v ) {
+                        var oldInputName = $(v).attr("name");
+                        var newInputName = oldInputName.replace("old_", "");
+                        newInputName = newInputName.slice(0, newInputName.indexOf(']') + 1) + '[]';
+                        $(v).attr("name", newInputName);
+                    });
+
+//                    var oldInputName = newP.find("input").attr("name");
+//                    var newInputName = oldInputName.replace("old_", "");
+//                    newInputName = newInputName.slice(0, newInputName.indexOf(']') + 1) + '[]';
+//                    newP.find("input").attr("name", newInputName);
 
                     newP.find("a").removeAttr("attriD");
 
@@ -69,7 +79,7 @@
                 newP.find("a").html("[-]");
                 g.after(newP);
             } else {
-                if (g.find("select").length > 0) {
+                if ($(a).parent().text().indexOf('相册') == -1) {
                     var attrID = $(a).attr('attrId');
                     if (attrID) {
                         var url = "{{ url('admin/goods/ajaxDeleteAttr') }}" + '/' +  attrID + '/' + {{ $goods->id }};

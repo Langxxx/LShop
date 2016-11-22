@@ -32,7 +32,7 @@
                             <tbody>
                             @foreach($categories as $category)
                                 <tr>
-                                    <td>{{ $category->name }}</td>
+                                    <td>{{ str_repeat('----', $category->depth - 1) . $category->name }}</td>
                                     <td>{{ $category->parent->name }}</td>
                                     <td>{{ $category->created_at }}</td>
                                     <td><a href="{{ url('admin/category/' . $category->id . '/edit') }}">编辑</a> |
