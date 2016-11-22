@@ -37,4 +37,9 @@ class HomeController extends Controller
         $staticAttributes = $this->goods->getGoodsStaticAttributes($goods);
         return view('home/introduction', compact('goods', 'attributes', 'goodsPics', 'staticAttributes'));
     }
+
+    public function category()
+    {
+        return view('home.category');
+    }
 }

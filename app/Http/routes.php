@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'Admin', 'prefix' => 
 
 Route::group(['namespace' => 'Home'], function () {
     Route::get('/', 'HomeController@index');
+    Route::get('/goods/category', ['uses'=>'HomeController@category','as'=>'home.category']);
     Route::get('/goods/{goodsID}', 'HomeController@goods');
 
 

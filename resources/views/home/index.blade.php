@@ -93,7 +93,7 @@
 			<!--小导航 -->
 			<div class="am-g am-g-fixed smallnav">
 				<div class="am-u-sm-3">
-					<a href="#"><img src="../images/navsmall.jpg" />
+					<a href="{{ route('home.category') }}"><img src="../images/navsmall.jpg" />
 						<div class="title">商品分类</div>
 					</a>
 				</div>
@@ -291,12 +291,7 @@
 	</div>
 	<!--引导 -->
 
-	<div class="navCir">
-		<li class="active"><a href="{{ url('/') }}"><i class="am-icon-home "></i>首页</a></li>
-		<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-		<li><a href="{{ url('/cart') }}"><i class="am-icon-shopping-basket"></i>购物车</a></li>
-		<li><a href="../person/index.html"><i class="am-icon-user"></i>我的</a></li>
-	</div>
+	@include('home.layouts.navCir')
 
 	<script>
 		window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
