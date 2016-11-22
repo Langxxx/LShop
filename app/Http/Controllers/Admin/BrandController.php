@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Brand\CreateRequest;
 use App\Http\Requests\Admin\Brand\UpdateRequest;
 
-
-class BrandController extends Basecontroller
+class BrandController extends BaseController
 {
     protected $brand;
 

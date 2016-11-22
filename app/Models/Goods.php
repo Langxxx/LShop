@@ -41,21 +41,21 @@ class Goods extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\category', 'category_id')->select('id', 'name');
+        return $this->belongsTo('App\Models\Category', 'category_id')->select('id', 'name');
     }
 
     public function brand()
     {
-        return $this->belongsTo('App\Models\brand')->select('id', 'name');
+        return $this->belongsTo('App\Models\Brand')->select('id', 'name');
     }
     public function type()
     {
-        return $this->belongsTo('App\Models\type')->select('id', 'name');
+        return $this->belongsTo('App\Models\Type')->select('id', 'name');
     }
 
     public function goodsAttributes()
     {
-        return $this->belongsToMany('App\Models\attribute', 'goods_attribute')->withPivot('id', 'attr_value', 'attr_price');;
+        return $this->belongsToMany('App\Models\Attribute', 'goods_attribute')->withPivot('id', 'attr_value', 'attr_price');;
     }
 
     public function pics()

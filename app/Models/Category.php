@@ -85,6 +85,6 @@ class Category extends Node
 
      public function goods()
      {
-         return $this->hasMany('App\Models\goods')->select('id', 'sm_logo', 'name', 'shop_price');
+         return $this->hasMany('App\Models\Goods')->select('id', 'sm_logo', 'name', 'shop_price');
      }
 }

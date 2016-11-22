@@ -1,4 +1,4 @@
-@extends('Admin.layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', '管理中心')
 @section('pageHeader', '商品类型管理')

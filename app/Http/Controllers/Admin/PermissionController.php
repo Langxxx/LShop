@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Eloquent\PermissionRepository;
 use Illuminate\Http\Request;

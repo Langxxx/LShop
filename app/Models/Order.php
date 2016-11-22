@@ -18,6 +18,6 @@ class Order extends Model
 
     public function goods()
     {
-        return $this->belongsToMany('App\Models\goods', 'order_goods');
+        return $this->belongsToMany('App\Models\Goods', 'order_goods');
     }
 }

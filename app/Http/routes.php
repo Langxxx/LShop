@@ -15,13 +15,13 @@ use App\Facades\RBAC;
 
 
 /*******后台路由***********/
-Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function() {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
     Route::get('login', 'LoginController@getLogin');
     Route::get('logout', 'LoginController@logout');
     Route::post('login', 'LoginController@postLogin');
 });
 
-Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 'admin'], function() {
+Route::group(['middleware' => 'auth:admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
 
     Route::get('/', 'IndexController@index');
 
@@ -67,7 +67,7 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin', 'prefix' => 
 
 /*******前台路由***********/
 
-Route::group(['namespace' => 'home'], function () {
+Route::group(['namespace' => 'Home'], function () {
     Route::get('/', 'HomeController@index');
     Route::get('/goods/{goodsID}', 'HomeController@goods');
 
