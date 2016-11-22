@@ -25,6 +25,7 @@ class CreateRequest extends Request
     {
         return $this->getMethod() == 'GET' ? [] : [
             'name' => 'required|unique:categories',
+            'parent_id' => 'required|numeric'
         ];
     }
 
@@ -33,6 +34,8 @@ class CreateRequest extends Request
         return [
             'name.required' => '分类名不能为空',
             'name.unique' => '分类已存在',
+            'parent_id.required' => '请选择一个父级分类',
+            'parent_id.numeric' => '请选择一个父级分类',
         ];
     }
 }

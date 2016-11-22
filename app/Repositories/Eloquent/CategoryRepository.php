@@ -47,7 +47,9 @@ class CategoryRepository extends  Repository
 
     public function create(array $attributes)
     {
-        $attributes['search_attr_id'] = implode(',', array_unique($attributes['attr_id']));
+        if (isset($attributes['attr_id'])) {
+            $attributes['search_attr_id'] = implode(',', array_unique($attributes['attr_id']));
+        }
 
         unset($attributes['type_id']);
         unset($attributes['attr_id']);
@@ -72,7 +74,9 @@ class CategoryRepository extends  Repository
 
     public function update($id, array $attributes)
     {
-        $attributes['search_attr_id'] = implode(',', array_unique($attributes['attr_id']));
+        if (isset($attributes['attr_id'])) {
+            $attributes['search_attr_id'] = implode(',', array_unique($attributes['attr_id']));
+        }
 
         unset($attributes['type_id']);
         unset($attributes['attr_id']);

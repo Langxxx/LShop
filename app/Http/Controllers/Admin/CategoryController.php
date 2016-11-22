@@ -48,7 +48,7 @@ class CategoryController extends BaseController
     {
         if ($request->getMethod() == 'PUT') {
             $this->category->update($catID, $request->except('__token'));
-            Alert::success('修改了一个父类', '成功');
+            Alert::success('修改了一个分类', '成功');
             return redirect('admin/category');
         }
         $categories = $this->category->getCategoriesForSelect();
