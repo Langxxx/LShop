@@ -30,8 +30,11 @@ class HomeController extends Controller
 
     public function goods($goodsID)
     {
-        $goods = $this->goods->find($goodsID);
+        $goods = $this->goods
+            ->find($goodsID);
+        $goodsPics = $goods->pics()->get();
         $attributes = $this->goods->getGoodsAttributesForSelect($goods);
-        return view('home/introduction', compact('goods', 'attributes'));
+        $staticAttributes = $this->goods->getGoodsStaticAttributes($goods);
+        return view('home/introduction', compact('goods', 'attributes', 'goodsPics', 'staticAttributes'));
     }
 }

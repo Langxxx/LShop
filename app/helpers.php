@@ -48,7 +48,7 @@ function deleteImages($images) {
     }
 }
 
-function showImg($url, $width='', $height='') {
+function showImg($url, $width='', $height='', array $attributes = [] ) {
     $url = \Illuminate\Support\Facades\Config::get('app.url') . '/' . $url;
     if ($width){
         $width = "width='$width'";
@@ -56,5 +56,11 @@ function showImg($url, $width='', $height='') {
     if ($height) {
         $height = "height='$height'";
     }
-    echo "<img src='$url' $width $height>";
+
+    $other = "";
+    foreach ($attributes as $k => $v) {
+        $other .=  "$k='$v'";
+    }
+
+    echo "<img src='$url' $width $height $other>";
 }

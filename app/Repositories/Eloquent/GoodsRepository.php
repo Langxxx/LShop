@@ -20,6 +20,12 @@ class GoodsRepository extends  Repository
         return Goods::class;
     }
 
+
+    public function find($id, $columns = ['*'])
+    {
+        return $this->model->with('goodsAttributes')->find($id, $columns);
+    }
+
     public function create(array $attributes)
     {
 //        dd($attributes);
@@ -214,9 +220,11 @@ class GoodsRepository extends  Repository
     {
 
 
-        $goodsTypeOptionAttributes = $goods->goodsAttributes()
-            ->where('type', '=', '1')
-            ->get()->groupBy('name');
+        $goodsTypeOptionAttributes = $goods->goodsAttributes
+            ->filter(function ($value, $key) {
+                return $value->type == 1;
+            })
+            ->groupBy('name');
 
 
         foreach ($goodsTypeOptionAttributes as $goodsTypeOptionAttribute) {
@@ -226,6 +234,15 @@ class GoodsRepository extends  Repository
                 })->flip();
         }
         return $goodsTypeOptionAttributes;
+    }
+
+    public function getGoodsStaticAttributes($goods)
+    {
+        $staticAttributes = $goods->goodsAttributes
+            ->filter(function ($value, $key) {
+                return $value->type == 0;
+            });
+        return $staticAttributes;
     }
 
     public function setGoodsStocks($goodID, $stocksInfo)

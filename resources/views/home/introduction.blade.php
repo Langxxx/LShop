@@ -129,14 +129,17 @@
                 <div class="flexslider">
                     <ul class="slides">
                         <li>
-                            <img src="../images/01.jpg" title="pic"/>
+                            {{--<img src="../images/01.jpg" title="pic"/>--}}
+                            {{ showImg($goods->logo) }}
                         </li>
+                        @foreach($goodsPics as $goodsPic)
                         <li>
-                            <img src="../images/02.jpg"/>
+                            {{ showImg($goodsPic->pic) }}
                         </li>
-                        <li>
-                            <img src="../images/03.jpg"/>
-                        </li>
+                        @endforeach
+                        {{--<li>--}}
+                            {{--<img src="../images/03.jpg"/>--}}
+                        {{--</li>--}}
                     </ul>
                 </div>
             </section>
@@ -160,28 +163,27 @@
                     </script>
 
                     <div class="tb-booth tb-pic tb-s310">
-                        <a href="../images/01.jpg"><img src="../images/01_mid.jpg" alt="细节展示放大镜特效"
-                                                        rel="../images/01.jpg" class="jqzoom"/></a>
+                        <a href="{{ '/' . $goods->logo }}">
+                            <img src="{{ '/' . $goods->logo }}" alt="细节展示放大镜特效"
+                                                        rel="{{ '/' . $goods->logo }}" class="jqzoom"/></a>
                     </div>
                     <ul class="tb-thumb" id="thumblist">
                         <li class="tb-selected">
                             <div class="tb-pic tb-s40">
-                                <a href="#"><img src="../images/01_small.jpg"
-                                                 mid="../images/01_mid.jpg" big="../images/01.jpg"></a>
+                                <a href="javascript:void(0)">
+                                    {{ showImg($goods->sm_logo, '', '', ['mid' => '/' . $goods->logo, 'big' => '/' . $goods->logo]) }}
+                                </a>
                             </div>
                         </li>
+                        @foreach($goodsPics as $goodsPic)
                         <li>
                             <div class="tb-pic tb-s40">
-                                <a href="#"><img src="../images/02_small.jpg"
-                                                 mid="../images/02_mid.jpg" big="../images/02.jpg"></a>
+                                <a href="javascript:void(0)">
+                                    {{ showImg($goodsPic->sm_pic, '', '', ['mid' => '/' . $goodsPic->pic, 'big' => '/' . $goodsPic->pic]) }}
+                                </a>
                             </div>
                         </li>
-                        <li>
-                            <div class="tb-pic tb-s40">
-                                <a href="#"><img src="../images/03_small.jpg"
-                                                 mid="../images/03_mid.jpg" big="../images/03.jpg"></a>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
 
@@ -517,16 +519,9 @@
                                 <h4>产品参数：</h4></div>
                             <div class="clear"></div>
                             <ul id="J_AttrUL">
-                                <li title="">产品类型:&nbsp;烘炒类</li>
-                                <li title="">原料产地:&nbsp;巴基斯坦</li>
-                                <li title="">产地:&nbsp;湖北省武汉市</li>
-                                <li title="">配料表:&nbsp;进口松子、食用盐</li>
-                                <li title="">产品规格:&nbsp;210g</li>
-                                <li title="">保质期:&nbsp;180天</li>
-                                <li title="">产品标准号:&nbsp;GB/T 22165</li>
-                                <li title="">生产许可证编号：&nbsp;QS4201 1801 0226</li>
-                                <li title="">储存方法：&nbsp;请放置于常温、阴凉、通风、干燥处保存</li>
-                                <li title="">食用方法：&nbsp;开袋去壳即食</li>
+                                @foreach($staticAttributes as $staticAttribute)
+                                <li title="">{{$staticAttribute->name}}:&nbsp;{{ $staticAttribute->pivot->attr_value }}</li>
+                                @endforeach
                             </ul>
                             <div class="clear"></div>
                         </div>
