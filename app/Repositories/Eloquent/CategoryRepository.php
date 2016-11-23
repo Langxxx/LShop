@@ -43,10 +43,7 @@ class CategoryRepository extends  Repository
 //        $cats =  $this->all()->pluck('name', 'id');
 //        $cats = $this->getAllForSelect('name', 'id');
         $cats = $this->model
-            ->root()
-            ->descendantsAndSelf()
-            ->with('parent')
-            ->get()
+            ->all()
             ->each(function($item, $key) {
                 $item->name = str_repeat('--', $item->depth) . $item->name;
             })

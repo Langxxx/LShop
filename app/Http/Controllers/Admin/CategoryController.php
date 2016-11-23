@@ -52,6 +52,7 @@ class CategoryController extends BaseController
             return redirect('admin/category');
         }
         $categories = $this->category->getCategoriesForSelect();
+
         $category = $this->category->find($catID);
 //        $category->search_types = $this->attribute
 //            ->findWhereIn('id', explode(',', $category->search_attr_id))

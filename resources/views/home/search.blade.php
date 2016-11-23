@@ -103,17 +103,19 @@
 					<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
 						@foreach($allGoods as $goods)
 						<li>
-							<div class="i-pic limit">
-								<img src="/images/imgsearch1.jpg" />
-								<p class="title fl">{{ $goods->name }}</p>
-								<p class="price fl">
-									<b>¥</b>
-									<strong>{{ $goods->shop_price }}</strong>
-								</p>
-								<p class="number fl">
-									销量<span>1110</span>
-								</p>
-							</div>
+							<a href="{{ url('/goods/' . $goods->id) }}">
+								<div class="i-pic limit">
+									{{ showImg($goods->sm_logo) }}
+									<p class="title fl">{{ $goods->name }}</p>
+									<p class="price fl">
+										<b>¥</b>
+										<strong>{{ $goods->shop_price }}</strong>
+									</p>
+									<p class="number fl">
+										销量<span>1110</span>
+									</p>
+								</div>
+							</a>
 						</li>
 						@endforeach
 					</ul>
